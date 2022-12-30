@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/img/STM32_photo/9.png">
 <meta property="og:image" content="http://example.com/img/STM32_photo/10.png">
 <meta property="article:published_time" content="2022-12-30T13:39:41.926Z">
-<meta property="article:modified_time" content="2022-12-30T15:09:58.232Z">
+<meta property="article:modified_time" content="2022-12-30T15:11:31.500Z">
 <meta property="article:author" content="huerli">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/img/STM32_photo/0.png">
@@ -296,14 +296,14 @@
               <div class="markdown-body">
                 
                 <h1 id="STM32无线烧录器Part1"><a href="#STM32无线烧录器Part1" class="headerlink" title="STM32无线烧录器Part1"></a>STM32无线烧录器Part1</h1><h2 id="下载固件"><a href="#下载固件" class="headerlink" title="下载固件"></a>下载固件</h2><p><em>使用合宙的ESP32c3烧录固件wireless-DAPLINK-LuatOS-ESP32C3_USB.soc ，在这个固件中默认链接 Wi-Fi配置会自动连接名为DAP，密码为12345678的Wi-Fi。</em><br><strong>Luatostools下载：<a target="_blank" rel="noopener" href="https://wiki.luatos.com/boardGuide/flash.html">luatostools</a></strong><br><em>因为打开exe文件后会下载一些包，所以最好新建一个文件夹再打开。</em>  </p>
-<p><img src="/img/STM32_photo/0.png" srcset="/img/loading.gif" lazyload alt="photo0">  </p>
+<p><img src="/img/STM32_photo/0.png" srcset="/img/loading.gif" lazyload>  </p>
 <p>固件下载  </p>
-<p><img src="/img/STM32_photo/1.png" srcset="/img/loading.gif" lazyload alt="photo1"><br><img src="/img/STM32_photo/2.png" srcset="/img/loading.gif" lazyload alt="photo2"><br><em>固件烧录完成后，电脑打开热点，将热点名称设置为<br><font color ="dd0000">DAP</font>,密码设置为<br><font color ="dd0000">12345678</font><br>并且 频段只能是2.4G</em>  </p>
-<h2 id="使用-elaphureLink"><a href="#使用-elaphureLink" class="headerlink" title="使用 elaphureLink"></a>使用 elaphureLink</h2><p>打开热点管理，将esp通电后会链接热点，连接后会显示ip<br><img src="/home/huerli/Blog/source/img/STM32_photo/3.png" srcset="/img/loading.gif" lazyload alt="photo3"><br>打开elaphureLink，将ip添入Device Address<br><img src="/home/huerli/Blog/source/img/STM32_photo/4.png" srcset="/img/loading.gif" lazyload alt="photo4"><br>点击下方install，将驱动安装到Keil下，这个路径一定要对，不然识别不了。<br>点击Start Proxy 右边的小按钮打开<br><font color ="dd0000">在使用期间elaphureLink不可关闭。</font>  </p>
-<h2 id="keil"><a href="#keil" class="headerlink" title="keil"></a>keil</h2><p>打开keil 选择魔法棒，再点击debug，选择 <font color ="dd0000">elaphureLink Debugger</font><br><img src="/img/STM32_photo/5.png" srcset="/img/loading.gif" lazyload alt="photo5"><br>点击setting 如下图设置。（如果点不开，那就把elaphureLink关闭，打开setting后再打开）<br><img src="/img/STM32_photo/6.png" srcset="/img/loading.gif" lazyload alt="photo6">  </p>
-<h2 id="接线"><a href="#接线" class="headerlink" title="接线"></a>接线</h2><p><img src="/img/STM32_photo/7.png" srcset="/img/loading.gif" lazyload alt="photo7"><br>分别接在STM32对应的位置<br><img src="/img/STM32_photo/8.png" srcset="/img/loading.gif" lazyload alt="photo8"><br><img src="/img/STM32_photo/9.png" srcset="/img/loading.gif" lazyload alt="photo9">  </p>
+<p><img src="/img/STM32_photo/1.png" srcset="/img/loading.gif" lazyload><br><img src="/img/STM32_photo/2.png" srcset="/img/loading.gif" lazyload><br><em>固件烧录完成后，电脑打开热点，将热点名称设置为<br><font color ="dd0000">DAP</font>,密码设置为<br><font color ="dd0000">12345678</font><br>并且 频段只能是2.4G</em>  </p>
+<h2 id="使用-elaphureLink"><a href="#使用-elaphureLink" class="headerlink" title="使用 elaphureLink"></a>使用 elaphureLink</h2><p>打开热点管理，将esp通电后会链接热点，连接后会显示ip<br><img src="/home/huerli/Blog/source/img/STM32_photo/3.png" srcset="/img/loading.gif" lazyload><br>打开elaphureLink，将ip添入Device Address<br><img src="/home/huerli/Blog/source/img/STM32_photo/4.png" srcset="/img/loading.gif" lazyload><br>点击下方install，将驱动安装到Keil下，这个路径一定要对，不然识别不了。<br>点击Start Proxy 右边的小按钮打开<br><font color ="dd0000">在使用期间elaphureLink不可关闭。</font>  </p>
+<h2 id="keil"><a href="#keil" class="headerlink" title="keil"></a>keil</h2><p>打开keil 选择魔法棒，再点击debug，选择 <font color ="dd0000">elaphureLink Debugger</font><br><img src="/img/STM32_photo/5.png" srcset="/img/loading.gif" lazyload><br>点击setting 如下图设置。（如果点不开，那就把elaphureLink关闭，打开setting后再打开）<br><img src="/img/STM32_photo/6.png" srcset="/img/loading.gif" lazyload>  </p>
+<h2 id="接线"><a href="#接线" class="headerlink" title="接线"></a>接线</h2><p><img src="/img/STM32_photo/7.png" srcset="/img/loading.gif" lazyload><br>分别接在STM32对应的位置<br><img src="/img/STM32_photo/8.png" srcset="/img/loading.gif" lazyload><br><img src="/img/STM32_photo/9.png" srcset="/img/loading.gif" lazyload>  </p>
 <h1 id="STM32无线烧录器Part2"><a href="#STM32无线烧录器Part2" class="headerlink" title="STM32无线烧录器Part2"></a>STM32无线烧录器Part2</h1><p>继上次完成了ESP32无线烧录器。那么有一个问题就是，一堆人都在一起想用这个来无线烧录呢，那么固件中定死的热点名称岂不是会互相的扰乱。所以需要自己编译属于自己的热点名称。<br>首先需要准备以下几样东西。<br>Ubuntu （需要安装idf），这里默认你拥有。<br>ESP32C3，同样默认拥有。合宙简约版esp32c3即可。<br>无限烧录的源码。传送门：<a target="_blank" rel="noopener" href="https://github.com/windowsair/wireless-esp8266-dap">wireles-dap</a>  </p>
-<h2 id="安装IDF"><a href="#安装IDF" class="headerlink" title="安装IDF"></a>安装IDF</h2><p>由于网速原因，这里不通过克隆的方式进行下载。<br><a target="_blank" rel="noopener" href="https://github.com/espressif/esp-idf/releases/tag/v4.4.2">esp-idf</a><br><img src="/img/STM32_photo/10.png" srcset="/img/loading.gif" lazyload alt="photo10">  </p>
+<h2 id="安装IDF"><a href="#安装IDF" class="headerlink" title="安装IDF"></a>安装IDF</h2><p>由于网速原因，这里不通过克隆的方式进行下载。<br><a target="_blank" rel="noopener" href="https://github.com/espressif/esp-idf/releases/tag/v4.4.2">esp-idf</a><br><img src="/img/STM32_photo/10.png" srcset="/img/loading.gif" lazyload>  </p>
 
                 
               </div>
