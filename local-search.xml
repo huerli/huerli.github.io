@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>lcd_touchscreem</title>
+    <link href="/2023/01/01/lcd-touchscreem/"/>
+    <url>/2023/01/01/lcd-touchscreem/</url>
+    
+    <content type="html"><![CDATA[<p>make menuconfig<br>Allwinner -&gt; [*]mtop</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>tina-linux-wifi</title>
     <link href="/2023/01/01/tina-linux-wifi/"/>
     <url>/2023/01/01/tina-linux-wifi/</url>
