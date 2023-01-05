@@ -16,41 +16,28 @@
   <meta name="author" content="huerli">
   <meta name="keywords" content="">
   
-    <meta name="description" content="tina-linux wifi问题">
+    <meta name="description" content="tina-linux lcd 显示及触摸">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tina-linux-wifi">
-<meta property="og:url" content="https://huerli.github.io/2023/01/03/tina-linux-wifi/index.html">
+<meta property="og:title" content="tina-lcd">
+<meta property="og:url" content="https://huerli.github.io/2023/01/05/tina-lcd/index.html">
 <meta property="og:site_name" content="huerli Blog">
-<meta property="og:description" content="tina-linux wifi问题">
+<meta property="og:description" content="tina-linux lcd 显示及触摸">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/0.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/1.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/2.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/3.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/4.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/5.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/6.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/7.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/8.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/9.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/10.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/11.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/12.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/13.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/14.png">
-<meta property="og:image" content="https://huerli.github.io/img/tina-linux-wifi/15.png">
-<meta property="article:published_time" content="2023-01-03T14:56:26.353Z">
-<meta property="article:modified_time" content="2023-01-03T14:56:26.353Z">
+<meta property="og:image" content="https://huerli.github.io/img/tina-linux-lcd/0.png">
+<meta property="og:image" content="https://huerli.github.io/img/tina-linux-lcd/1.png">
+<meta property="og:image" content="https://huerli.github.io/img/tina-linux-lcd/2.png">
+<meta property="article:published_time" content="2023-01-05T10:42:22.923Z">
+<meta property="article:modified_time" content="2023-01-05T10:42:22.923Z">
 <meta property="article:author" content="huerli">
 <meta property="article:tag" content="tina">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huerli.github.io/img/tina-linux-wifi/0.png">
+<meta name="twitter:image" content="https://huerli.github.io/img/tina-linux-lcd/0.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>tina-linux-wifi - huerli Blog</title>
+  <title>tina-lcd - huerli Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -216,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="tina-linux-wifi"></span>
+            <span id="subtitle" data-typed-text="tina-lcd"></span>
           
         </div>
 
@@ -227,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-03 22:56" pubdate>
-          2023年1月3日 晚上
+        <time datetime="2023-01-05 18:42" pubdate>
+          2023年1月5日 晚上
         </time>
       </span>
     
@@ -239,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          999 字
+          1.4k 字
         
       </span>
     
@@ -250,7 +237,7 @@
         
         
         
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -296,43 +283,44 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">tina-linux-wifi</h1>
+            <h1 style="display: none">tina-lcd</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="tina-linux初体验"><a href="#tina-linux初体验" class="headerlink" title="tina-linux初体验"></a>tina-linux初体验</h1><p>编译tina就是一个巨坑这一步是最难的，建议就是同百度网盘来下载文件。官方网站真的真的真的太慢了…<br>成功搭建编译环境之后，直接进行编译，编译出的结果镜像却无法连接wifi！<br>输入官方提供的wifi指令却显示报错<br><img src="/img/tina-linux-wifi/0.png" srcset="/img/loading.gif" lazyload><br>出现这个错误我们从<font color ="00ff00" size = 10>三个方面</font>来看这个问题<br>1.驱动<br>查看驱动命令检查驱动是否在运行并且是不是对应网卡的驱动</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>lsmod <br></code></pre></td></tr></table></figure>
-<p><img src="/img/tina-linux-wifi/1.png" srcset="/img/loading.gif" lazyload><br>我的板子是T113,对应的网卡驱动是8723DS并不是8189fs，所以需要将这个驱动卸载。</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rmmod <span class="hljs-number">8189</span>fs<br></code></pre></td></tr></table></figure>
-<p>出现图上内容则卸载驱动成功<br><img src="/img/tina-linux-wifi/2.png" srcset="/img/loading.gif" lazyload><br>加载正确的wifi驱动</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>modprobe <span class="hljs-number">8723</span>ds.ko<br></code></pre></td></tr></table></figure>
-<p><img src="/img/tina-linux-wifi/3.png" srcset="/img/loading.gif" lazyload><br>出现图上内容则加载驱动成功<br>2.网卡<br>检查网卡是否在工作</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>ifconfig<br></code></pre></td></tr></table></figure>
-<p><img src="/img/tina-linux-wifi/4.png" srcset="/img/loading.gif" lazyload><br>出现图上内容则网卡在工作<br>3.wap服务<br>在进程中查看wpa_supplicant是否存在  </p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> <span class="hljs-built_in">ps</span> | grep wpa_supplicant<br></code></pre></td></tr></table></figure>
-<p>出现的是下方内容则说明该进程不存在<br><img src="/img/tina-linux-wifi/5.png" srcset="/img/loading.gif" lazyload></p>
-<p>输入该命令启动服务  </p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ <span class="hljs-regexp">/etc/i</span>nit.d/wpa_supplicant start<br></code></pre></td></tr></table></figure>
-<p>出现的是下方内容则说明该进程存在<br><img src="/img/tina-linux-wifi/6.png" srcset="/img/loading.gif" lazyload><br>尝试连接wifi  </p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>wifi_connect_ap_test DAP <span class="hljs-number">12345678</span><br></code></pre></td></tr></table></figure>
-<p><img src="/img/tina-linux-wifi/7.png" srcset="/img/loading.gif" lazyload><br>wifi连接成功<br>尝试ping外网<br><img src="/img/tina-linux-wifi/8.png" srcset="/img/loading.gif" lazyload><br>能ping通百度</p>
-<h1 id="开机自启动驱动和服务"><a href="#开机自启动驱动和服务" class="headerlink" title="开机自启动驱动和服务"></a>开机自启动驱动和服务</h1><p>开机自启动的程序一般是存放在 <font color ="dddd00" size = 10>&#x2F;etc&#x2F;init.d </font> 下<br>使用下方指令查看自启动文件</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ vi <span class="hljs-regexp">/etc/i</span>nit.d/rsC <br></code></pre></td></tr></table></figure>
-<p>可以看到自启动模块驱动文件是 &#x2F;etc&#x2F;init.d&#x2F;rc.moudles<br><img src="/img/tina-linux-wifi/9.png" srcset="/img/loading.gif" lazyload></p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ vi <span class="hljs-regexp">/etc/i</span>nit.d/rc.moudles <br></code></pre></td></tr></table></figure>
-<p>驱动8723ds被注释了，将#删除 并将用不到的驱动注释<br><img src="/img/tina-linux-wifi/10.png" srcset="/img/loading.gif" lazyload><br>注释后如下：<br><img src="/img/tina-linux-wifi/11.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<p>查看 &#x2F;etc&#x2F;profile 可以看到如下的语句 它会执行&#x2F;etc&#x2F;profile.d 所有以 .sh结尾的文件<br><img src="/img/tina-linux-wifi/12.png" srcset="/img/loading.gif" lazyload><br>看看 &#x2F;etc&#x2F;profile.d 是否存在 若不存在则创建</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> /etc/profile.d</span><br></code></pre></td></tr></table></figure>
-<p>传建启动文件</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">$ <span class="hljs-keyword">vi</span> wifi_connect.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
-<p>写入</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">wifi_connect_ap_test</span> DAP <span class="hljs-number">12345678</span><br></code></pre></td></tr></table></figure>
-<p>重新启动后可以看到有连接信息打印<br><img src="/img/tina-linux-wifi/13.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="一劳永逸-修改源码中的内容"><a href="#一劳永逸-修改源码中的内容" class="headerlink" title="一劳永逸:修改源码中的内容"></a>一劳永逸:修改源码中的内容</h1><p>位置</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">target<span class="hljs-regexp">/allwinner/</span>(芯片平台)<span class="hljs-regexp">/busybox-init-base-files/</span>etc<br></code></pre></td></tr></table></figure>
-<p><img src="/img/tina-linux-wifi/14.png" srcset="/img/loading.gif" lazyload><br>修改ssid和psk 分别是WIFI名称和密码<br><img src="/img/tina-linux-wifi/15.png" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="打开LCD显示"><a href="#打开LCD显示" class="headerlink" title="打开LCD显示"></a>打开LCD显示</h1><p>在tina-linux 的sdk中lcd显示是默认打开的，所以不需要作过多的操作，但是设备树中屏幕的分辨率参数等等可能和你使用的屏幕不一样，所以需要修改一下。  </p>
+<h2 id="修改设备树"><a href="#修改设备树" class="headerlink" title="修改设备树"></a>修改设备树</h2><p>设备树位置  </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">device<span class="hljs-regexp">/config/</span>chips<span class="hljs-regexp">/(你的芯片)/</span>configs<span class="hljs-regexp">/mq_r/</span>board.dts<br></code></pre></td></tr></table></figure>
+<p>打开后ctrl+f 搜索 ‘lcd0’，找未被注释的lcd0  </p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">&amp;lcd0 &#123;<br>	lcd_used            = <span class="hljs-variable">&lt;1&gt;</span>;<br><br>	lcd_driver_name     = <span class="hljs-string">&quot;default_lcd&quot;</span>;<br>	lcd_if              = <span class="hljs-variable">&lt;0&gt;</span>;<br>	lcd_x               = <span class="hljs-variable">&lt;800&gt;</span>;<br>	lcd_y               = <span class="hljs-variable">&lt;480&gt;</span>;<br>	lcd_width           = <span class="hljs-variable">&lt;150&gt;</span>;<br>	lcd_height          = <span class="hljs-variable">&lt;94&gt;</span>;<br>	lcd_dclk_freq       = <span class="hljs-variable">&lt;48&gt;</span>;<br>	......<br></code></pre></td></tr></table></figure>
+<p>大概就是这些内容，需要修改的就是lcd_x,lcd_y修改为对应的。<br>将修改为的设备树重新编译并烧录<br>进行雪花屏测试  </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/dev/u</span>random &gt; <span class="hljs-regexp">/dev/</span>fb0<br></code></pre></td></tr></table></figure>
+<p>清屏</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/dev/</span>zero &gt; <span class="hljs-regexp">/dev/</span>fb0<br></code></pre></td></tr></table></figure>
+<p>彩屏测试</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">echo <span class="hljs-number">8</span> &gt; <span class="hljs-regexp">/sys/</span><span class="hljs-keyword">class</span><span class="hljs-regexp">/disp/</span>disp<span class="hljs-regexp">/attr/</span>colorbar<br></code></pre></td></tr></table></figure>
+<h1 id="gt911触摸"><a href="#gt911触摸" class="headerlink" title="gt911触摸"></a>gt911触摸</h1><p>设备树存在也可以正常驱动触摸屏<br>将gt911驱动编译进内核  </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">source</span> build/envsetup.<span class="hljs-keyword">sh</span>&amp;&amp;lunch&amp;&amp;<span class="hljs-keyword">make</span> kernel_menuconfig<br></code></pre></td></tr></table></figure>
+<p>选择对应芯片<br><img src="/img/tina-linux-lcd/0.png" srcset="/img/loading.gif" lazyload><br>驱动路径</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xl">D<span class="hljs-function"><span class="hljs-title">evice</span> Drivers  ---&gt;</span> <br>	I<span class="hljs-function"><span class="hljs-title">nput</span> device support  ---&gt;</span><br>		[*]   T<span class="hljs-function"><span class="hljs-title">ouchscreens</span>  ---&gt;</span><br>			&lt;*&gt;   Goodix I2C touchscreen<br>			&lt;*&gt;   gt9xxnew touchscreen driver<br><br></code></pre></td></tr></table></figure>
+<p>勾选tslib库测试屏幕</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make menuconfig</span><br></code></pre></td></tr></table></figure>
+<p>库路径</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xl">L<span class="hljs-function"><span class="hljs-title">ibraries</span>  ---&gt;</span> <br>	&lt;*&gt;tslib<br>A<span class="hljs-function"><span class="hljs-title">llwinner</span>  ---&gt;</span><br>	&lt;*&gt;mtop<br></code></pre></td></tr></table></figure>
+<p>编译烧录  </p>
+<p>查看设备节点  </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls <span class="hljs-regexp">/dev/i</span>nput/<br></code></pre></td></tr></table></figure>
+<p>可以看到对应的设备节点</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode">eve<span class="hljs-symbol">nt0</span>  eve<span class="hljs-symbol">nt1</span><br></code></pre></td></tr></table></figure>
+<h1 id="little-lvgl-示例"><a href="#little-lvgl-示例" class="headerlink" title="little lvgl 示例"></a>little lvgl 示例</h1><h2 id="使能例程"><a href="#使能例程" class="headerlink" title="使能例程"></a>使能例程</h2><p>官方默认也使能了lvgl的例程</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make menuconfig</span><br></code></pre></td></tr></table></figure>
+<p>自行勾选需要的例程</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vhdl">Gui <span class="hljs-comment">---&gt;</span><br>	Liitevgl <span class="hljs-comment">---&gt;</span><br>		&lt;*&gt; lv_examples<br>		&lt;*&gt; lvgl-<span class="hljs-number">8.1</span>.<span class="hljs-number">0</span> <span class="hljs-keyword">use</span> sunxifb double <span class="hljs-keyword">buffer</span><br>		&lt;*&gt; lvgl-<span class="hljs-number">8.1</span>.<span class="hljs-number">0</span> <span class="hljs-keyword">use</span> sunxifb cache<br>		-*- lvgl-<span class="hljs-number">8.1</span>.<span class="hljs-number">0</span> <span class="hljs-keyword">use</span> sunxifb g2d	<br>		&lt;*&gt; lvgl-<span class="hljs-number">8.1</span>.<span class="hljs-number">0</span> <span class="hljs-keyword">use</span> sunxifb g2d rotate<br>		&lt;*&gt; lv_g2d_test<br>		&lt;*&gt; lv_monitor<br></code></pre></td></tr></table></figure>
+<p>编译烧录<br>在终端中输入  </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">lv_examples</span> <span class="hljs-number">0</span> or <span class="hljs-number">1</span> or <span class="hljs-number">2</span> or <span class="hljs-number">3</span> or <span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<p>可以看到对应的例程现象，同时也看到了报错<br><img src="/img/tina-linux-lcd/1.png" srcset="/img/loading.gif" lazyload><br>这个报错是应为触摸对应的节点没有和源码对上(lv_drv_conf.h)<br><img src="/img/tina-linux-lcd/2.png" srcset="/img/loading.gif" lazyload><br>源码中节点是 <font color ="dd0000" size = 13> event3 </font><br>在终端做一个文件映射（比如你的触摸设备是event1） </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ln -s <span class="hljs-regexp">/dev/i</span>nput<span class="hljs-regexp">/event1 /</span>dev<span class="hljs-regexp">/input/</span>event3 <br></code></pre></td></tr></table></figure>
+<p>或者是将源码修改为触摸设备对应的节点  </p>
 
                 
               </div>
@@ -378,8 +366,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>tina-linux-wifi</div>
-      <div>https://huerli.github.io/2023/01/03/tina-linux-wifi/</div>
+      <div>tina-lcd</div>
+      <div>https://huerli.github.io/2023/01/05/tina-lcd/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +379,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月3日</div>
+          <div>2023年1月5日</div>
         </div>
       
       
@@ -423,18 +411,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/05/tina-lcd/" title="tina-lcd">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">tina-lcd</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/01/lcd-touchscreem/" title="lcd_touchscreem">
-                        <span class="hidden-mobile">lcd_touchscreem</span>
+                      <a href="/2023/01/03/tina-linux-wifi/" title="tina-linux-wifi">
+                        <span class="hidden-mobile">tina-linux-wifi</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
