@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>上网小技巧</title>
+    <link href="/2023/01/19/%E4%B8%8A%E7%BD%91%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <url>/2023/01/19/%E4%B8%8A%E7%BD%91%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+    
+    <content type="html"><![CDATA[<h1 id="学习瓶颈"><a href="#学习瓶颈" class="headerlink" title="学习瓶颈"></a>学习瓶颈</h1><p>平时上github要么就连不上要么就超级慢<br>下载速度简直慢的不行<br>为了加速学习进度<br>这里使用一个开源软件来上网  </p><h1 id="clash"><a href="#clash" class="headerlink" title="clash"></a>clash</h1><p><a href="https://github.com/Fndroid/clash_for_windows_pkg/releases/">clash</a><br>下载 <font color ="dd0000">Clash.for.Windows-0.20.12-x64-linux.tar.gz</font><br><img src="/img/getnet/0.png"><br>下载完成后解压<br><img src="/img/getnet/1.png"><br>这样就行</p><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./cfw<br></code></pre></td></tr></table></figure><p>将绿色按钮位置的两个都打开<br><img src="/img/getnet/2.png"><br>Mixin 开启服务<br>Start with Linux 是开机自启</p><h1 id="服务商"><a href="#服务商" class="headerlink" title="服务商"></a>服务商</h1><p><a href="https://suyunti.net/auth/login#">net</a><br>注册登录<br><img src="/img/getnet/3.png"><br>16块一个月也挺便宜不看电影100G完全够用了  </p><h1 id="导入配置文件"><a href="#导入配置文件" class="headerlink" title="导入配置文件"></a>导入配置文件</h1><p>可以是一键导入也可以是复制链接<br><img src="/img/getnet/4.png">  </p><h1 id="手动配置本地"><a href="#手动配置本地" class="headerlink" title="手动配置本地"></a>手动配置本地</h1><p><img src="/img/getnet/5.png">  </p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>hexo+gitee</title>
     <link href="/2023/01/07/hexo-gitee/"/>
     <url>/2023/01/07/hexo-gitee/</url>
