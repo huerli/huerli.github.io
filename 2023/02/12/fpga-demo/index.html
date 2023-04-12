@@ -16,12 +16,12 @@
   <meta name="author" content="huerli">
   <meta name="keywords" content="">
   
-    <meta name="description" content="newproject下载软件，教育版即可。   新建工程点击左上角，如下顺序操作后，点击ok。 1file-&gt;new-&gt;fpga design project 出现如下界面我的配置如下 点击next选择芯片型号点击型号选中，点击next-&gt;finish 点击此图标选择使用的语言，这里是verilog输入文件名称，这里存为led点击ok后工程会添加刚创建的文件   led代码123">
+    <meta name="description" content="newproject下载软件，教育版即可。   新建工程点击左上角，如下顺序操作后，点击ok。 1file-&gt;new-&gt;fpga design project 出现如下界面我的配置如下 点击next选择芯片型号点击型号选中，点击next-&gt;finish 点击此图标选择使用的语言，这里是verilog输入文件名称，这里存为led点击ok后工程会添加刚创建的文件   led实现：le">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fpga_demo">
 <meta property="og:url" content="https://huerli.github.io/2023/02/12/fpga-demo/index.html">
 <meta property="og:site_name" content="huerli Blog">
-<meta property="og:description" content="newproject下载软件，教育版即可。   新建工程点击左上角，如下顺序操作后，点击ok。 1file-&gt;new-&gt;fpga design project 出现如下界面我的配置如下 点击next选择芯片型号点击型号选中，点击next-&gt;finish 点击此图标选择使用的语言，这里是verilog输入文件名称，这里存为led点击ok后工程会添加刚创建的文件   led代码123">
+<meta property="og:description" content="newproject下载软件，教育版即可。   新建工程点击左上角，如下顺序操作后，点击ok。 1file-&gt;new-&gt;fpga design project 出现如下界面我的配置如下 点击next选择芯片型号点击型号选中，点击next-&gt;finish 点击此图标选择使用的语言，这里是verilog输入文件名称，这里存为led点击ok后工程会添加刚创建的文件   led实现：le">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huerli.github.io/img/fpga_demo/project/0.png">
 <meta property="og:image" content="https://huerli.github.io/img/fpga_demo/project/1.png">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://huerli.github.io/img/fpga_demo/led/14.png">
 <meta property="og:image" content="https://huerli.github.io/img/fpga_demo/led/15.png">
 <meta property="article:published_time" content="2023-02-12T07:34:31.000Z">
-<meta property="article:modified_time" content="2023-02-12T09:13:26.982Z">
+<meta property="article:modified_time" content="2023-02-14T12:01:34.055Z">
 <meta property="article:author" content="huerli">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://huerli.github.io/img/fpga_demo/project/0.png">
@@ -247,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          856 字
+          1.5k 字
         
       </span>
     
@@ -258,7 +258,7 @@
         
         
         
-          8 分钟
+          13 分钟
         
       </span>
     
@@ -315,14 +315,17 @@
 <p>出现如下界面<br><img src="/img/fpga_demo/project/0.png" srcset="/img/loading.gif" lazyload><br>我的配置如下<br><img src="/img/fpga_demo/project/1.png" srcset="/img/loading.gif" lazyload></p>
 <p>点击next<br>选择芯片型号<br><img src="/img/fpga_demo/project/2.png" srcset="/img/loading.gif" lazyload><br>点击型号选中，点击next-&gt;finish</p>
 <p>点击此图标<br><img src="/img/fpga_demo/project/3.png" srcset="/img/loading.gif" lazyload><br>选择使用的语言，这里是verilog<br><img src="/img/fpga_demo/project/4.png" srcset="/img/loading.gif" lazyload><br>输入文件名称，这里存为led<br><img src="/img/fpga_demo/project/5.png" srcset="/img/loading.gif" lazyload><br>点击ok后工程会添加刚创建的文件  </p>
-<h1 id="led"><a href="#led" class="headerlink" title="led"></a>led</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-keyword">module</span> led(<br>    <span class="hljs-keyword">input</span> sys_clk,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> led = <span class="hljs-number">1</span><br>);<br><br><span class="hljs-keyword">reg</span> [<span class="hljs-number">23</span>:<span class="hljs-number">0</span>] counter = <span class="hljs-number">0</span>;<br><br><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> sys_clk) <span class="hljs-keyword">begin</span><br>    counter &lt;= counter + <span class="hljs-number">1&#x27;b1</span>;<br>    <span class="hljs-keyword">if</span>( counter == <span class="hljs-number">24&#x27;d1349_9999</span> ) <span class="hljs-keyword">begin</span><br>        led &lt;= ~led;<br>        counter &lt;= <span class="hljs-number">24&#x27;d0</span>;<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
+<h1 id="led"><a href="#led" class="headerlink" title="led"></a>led</h1><p>实现：led闪烁</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-keyword">module</span> led(<br>    <span class="hljs-keyword">input</span> sys_clk,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> led = <span class="hljs-number">1</span><br>);<br><br><span class="hljs-keyword">reg</span> [<span class="hljs-number">23</span>:<span class="hljs-number">0</span>] counter = <span class="hljs-number">0</span>;<br><br><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> sys_clk) <span class="hljs-keyword">begin</span><br>    counter &lt;= counter + <span class="hljs-number">1&#x27;b1</span>;<br>    <span class="hljs-keyword">if</span>( counter == <span class="hljs-number">24&#x27;d1349_9999</span> ) <span class="hljs-keyword">begin</span><br>        led &lt;= ~led;<br>        counter &lt;= <span class="hljs-number">24&#x27;d0</span>;<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
 <h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>点击 synthesize<br><img src="/img/fpga_demo/led/b_0.png" srcset="/img/loading.gif" lazyload><br>绑定管脚<br>点击floorplanner<br>输入的是原理图上对应的管脚<br><img src="/img/fpga_demo/led/b_1.png" srcset="/img/loading.gif" lazyload><br>点击 place &amp; route 布线</p>
 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>点击<br><img src="/img/fpga_demo/led/0.png" srcset="/img/loading.gif" lazyload><br>点击save<br><img src="/img/fpga_demo/led/1.png" srcset="/img/loading.gif" lazyload><br>下载到sram mode<br><img src="/img/fpga_demo/led/2.png" srcset="/img/loading.gif" lazyload><br>效果如下<br><img src="/img/fpga_demo/led/11.gif" srcset="/img/loading.gif" lazyload>  </p>
 <h2 id="在线逻辑分析仪"><a href="#在线逻辑分析仪" class="headerlink" title="在线逻辑分析仪"></a>在线逻辑分析仪</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>添加gao配置文件，一路next<br><img src="/img/fpga_demo/led/3.png" srcset="/img/loading.gif" lazyload><br><img src="/img/fpga_demo/led/4.png" srcset="/img/loading.gif" lazyload><br><img src="/img/fpga_demo/led/5.png" srcset="/img/loading.gif" lazyload><br><img src="/img/fpga_demo/led/6.png" srcset="/img/loading.gif" lazyload><br>添加触发信号<br><img src="/img/fpga_demo/led/7.png" srcset="/img/loading.gif" lazyload><br><img src="/img/fpga_demo/led/8.png" srcset="/img/loading.gif" lazyload><br>配置如下<br><img src="/img/fpga_demo/led/9.png" srcset="/img/loading.gif" lazyload><br>采样信号<br><img src="/img/fpga_demo/led/10.png" srcset="/img/loading.gif" lazyload><br>重新编译一下<br>延时太长，这里将延时改小</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-keyword">module</span> led(<br>    <span class="hljs-keyword">input</span> sys_clk,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> led<br>);<br><br><span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] counter;<br><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> sys_clk) <span class="hljs-keyword">begin</span><br>    counter &lt;= counter + <span class="hljs-number">1&#x27;b1</span>;<br>    <span class="hljs-keyword">if</span>( counter == <span class="hljs-number">4&#x27;d9</span> )<span class="hljs-keyword">begin</span><br>        led &lt;= ~led;<br>        counter &lt;= <span class="hljs-number">4&#x27;d0</span>;<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
 <p>点击 place &amp; route 重新编译一下</p>
 <h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p><img src="/img/fpga_demo/led/11.png" srcset="/img/loading.gif" lazyload><br>点击enable programer<br><img src="/img/fpga_demo/led/12.png" srcset="/img/loading.gif" lazyload><br>依次点击箭头所指<br><img src="/img/fpga_demo/led/13.png" srcset="/img/loading.gif" lazyload><br>出现波形<br><img src="/img/fpga_demo/led/14.png" srcset="/img/loading.gif" lazyload><br>放大可以看到波形是10us反转一次<br><img src="/img/fpga_demo/led/15.png" srcset="/img/loading.gif" lazyload><br>在板子上无法观察到，板子led恒亮</p>
-
+<h1 id="key"><a href="#key" class="headerlink" title="key"></a>key</h1><p>实现：按键输入led电平反转</p>
+<h2 id="按键消抖"><a href="#按键消抖" class="headerlink" title="按键消抖"></a>按键消抖</h2><p>按键通过延时进行消抖</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-keyword">module</span> key(<br>    <span class="hljs-keyword">input</span> sys_clk,                      <span class="hljs-comment">//时钟信号</span><br>    <span class="hljs-keyword">input</span> sys_rst_n,                    <span class="hljs-comment">//复位信号</span><br>    <span class="hljs-keyword">input</span> key,                          <span class="hljs-comment">//外部按键输入信号</span><br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span>       led                <span class="hljs-comment">//按键消抖后的数据</span><br>);<br><br> <br><span class="hljs-keyword">reg</span> [<span class="hljs-number">31</span>:<span class="hljs-number">0</span>] cnt;                         <span class="hljs-comment">//计数器</span><br><span class="hljs-keyword">reg</span> flag_k;                             <span class="hljs-comment">//标志位</span><br><br><br><span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> sys_clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> sys_rst_n) <span class="hljs-keyword">begin</span><br>    <span class="hljs-keyword">if</span>(!sys_rst_n)  <span class="hljs-keyword">begin</span>               <span class="hljs-comment">//复位</span><br>        cnt     &lt;= <span class="hljs-number">32&#x27;d0</span>   ;<br>        flag_k  &lt;= <span class="hljs-number">1&#x27;b0</span>   ;<br>        led     &lt;= <span class="hljs-number">1&#x27;b0</span>   ;<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!key &amp;&amp; flag_k) <span class="hljs-keyword">begin</span>        <span class="hljs-comment">//当key按下且标志位置 1 时</span><br>        led  &lt;= ~ led;                   <span class="hljs-comment">//led状态翻转</span><br>        flag_k &lt;= <span class="hljs-number">1&#x27;b0</span>;                  <span class="hljs-comment">//标志位清零    </span><br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cnt == <span class="hljs-number">32&#x27;d13500000</span>) <span class="hljs-keyword">begin</span><br>        flag_k &lt;= <span class="hljs-number">1&#x27;b1</span>   ;               <span class="hljs-comment">//标志位置 1</span><br>        cnt &lt;= <span class="hljs-number">32&#x27;d0</span> ;                   <span class="hljs-comment">//清除计数</span><br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">else</span>  <span class="hljs-keyword">begin</span><br>        cnt &lt;= cnt + <span class="hljs-number">1&#x27;b1</span> ;              <span class="hljs-comment">//计数</span><br>    <span class="hljs-keyword">end</span><br>    <br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -384,12 +387,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/03/20/%E8%93%9D%E6%A1%A5%E6%9D%AF/" title="蓝桥杯">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">蓝桥杯</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/07/hexo-gitee/" title="hexo+gitee">
-                        <span class="hidden-mobile">hexo+gitee</span>
+                      <a href="/2023/01/15/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%8C%89%E9%94%AE/" title="蓝桥杯">
+                        <span class="hidden-mobile">蓝桥杯</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

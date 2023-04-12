@@ -16,17 +16,21 @@
   <meta name="author" content="huerli">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这份教程这囊括了蓝桥杯独立按键和矩阵键盘的检测">
+    <meta name="description" content="蓝桥杯的一些外设，以及如何去看数据手册的内容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="按键扫描">
-<meta property="og:url" content="https://huerli.github.io/2022/12/31/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%8C%89%E9%94%AE/index.html">
+<meta property="og:title" content="蓝桥杯">
+<meta property="og:url" content="https://huerli.github.io/2023/01/15/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%8C%89%E9%94%AE/index.html">
 <meta property="og:site_name" content="huerli Blog">
-<meta property="og:description" content="这份教程这囊括了蓝桥杯独立按键和矩阵键盘的检测">
+<meta property="og:description" content="蓝桥杯的一些外设，以及如何去看数据手册的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huerli.github.io/img/button/0.png">
 <meta property="og:image" content="https://huerli.github.io/img/button/1.png">
-<meta property="article:published_time" content="2022-12-30T17:09:33.504Z">
-<meta property="article:modified_time" content="2022-12-30T17:13:40.315Z">
+<meta property="og:image" content="https://huerli.github.io/img/lqb/2.png">
+<meta property="og:image" content="https://huerli.github.io/img/lqb/3.png">
+<meta property="og:image" content="https://huerli.github.io/img/lqb/4.png">
+<meta property="og:image" content="https://huerli.github.io/img/lqb/5.png">
+<meta property="article:published_time" content="2023-01-15T06:39:05.129Z">
+<meta property="article:modified_time" content="2023-03-20T06:12:56.093Z">
 <meta property="article:author" content="huerli">
 <meta property="article:tag" content="蓝桥杯">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +40,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>按键扫描 - huerli Blog</title>
+  <title>蓝桥杯 - huerli Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="按键扫描"></span>
+            <span id="subtitle" data-typed-text="蓝桥杯"></span>
           
         </div>
 
@@ -213,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-31 01:09" pubdate>
-          2022年12月31日 凌晨
+        <time datetime="2023-01-15 14:39" pubdate>
+          2023年1月15日 下午
         </time>
       </span>
     
@@ -225,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          3.9k 字
         
       </span>
     
@@ -236,7 +240,7 @@
         
         
         
-          22 分钟
+          33 分钟
         
       </span>
     
@@ -282,19 +286,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">按键扫描</h1>
+            <h1 style="display: none">蓝桥杯</h1>
             
             
               <div class="markdown-body">
                 
-                <p><img src="/img/button/0.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="独立按键部分"><a href="#独立按键部分" class="headerlink" title="独立按键部分"></a>独立按键部分</h1><p>代码  </p>
+                <h1 id="按键部分"><a href="#按键部分" class="headerlink" title="按键部分"></a>按键部分</h1><p><img src="/img/button/0.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="独立按键"><a href="#独立按键" class="headerlink" title="独立按键"></a>独立按键</h2><p>代码  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">void BTN()//<br>&#123;<br>    unsigned char dat=P3^0xff;<br>    Trg=dat&amp;(dat^Cont);<br>    Cont=dat;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>因为初始状态 P3&#x3D;0xff，所以dat &#x3D;0x00，Trg&#x3D;0x00 ，因为0与上任何数都是0，Cont&#x3D;0<br>假设S4按下P3的状态是0xf7，此时 dat &#x3D;0x08 ，Trg&#x3D;0x08，Cont&#x3D;0x08<br>如果长按，则 dat &#x3D;0x08 ，Trg&#x3D;0x00，Cont&#x3D;0x08<br>所以我们可以每10ms就去读一次是否触发，相当于是消抖了。  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">unsigned char flag;//定义全局变量<br></code></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">void Timer0_Init(void)		//1毫秒@11.0592MHz<br>&#123;<br>	AUXR |= 0x80;		//定时器时钟1T模式<br>	TMOD &amp;= 0xF0;		//设置定时器模式<br>	TL0 = 0xCD;		//设置定时初始值<br>	TH0 = 0xD4;		//设置定时初始值<br>    EA=1;<br>    ET0=1;<br>	TR0 = 1;		//定时器0开始计时<br>&#125;<br>void Timer0() interrupt 1<br>&#123;<br>    static unsigned char flag_cnt;<br>    flag_cnt++;<br>    <span class="hljs-keyword">if</span>(flag_cnt==10)<br>    &#123;        <br>        flag=1;<br>        flag_cnt=0;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span>(flag)<br>&#123;<br>    BTN();<br>    flag=0;<br>    <span class="hljs-keyword">if</span>(Trg&amp;0x01)//S7<br>    &#123;<br>    <br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(Trg&amp;0x02)//S6<br>    &#123;<br> <br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(Trg&amp;0x04)//S5<br>    &#123;<br> <br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(Trg&amp;0x08)//S4<br>    &#123;<br> <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h1 id="矩阵键盘部分"><a href="#矩阵键盘部分" class="headerlink" title="矩阵键盘部分"></a>矩阵键盘部分</h1><p>在开头定义按键值定义成4*4的矩阵。  </p>
+<h2 id="矩阵键盘部分"><a href="#矩阵键盘部分" class="headerlink" title="矩阵键盘部分"></a>矩阵键盘部分</h2><p>在开头定义按键值定义成4*4的矩阵。  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">uchar code keymap[4][4]=&#123;&#123;7,11,15,19&#125;,&#123;6,10,14,18&#125;,&#123;5,9,13,17&#125;,&#123;4,8,12,16&#125;&#125;;<br>uchar Trg=0,Cont=0,flag=0,dat=0,keyvalue=0,key=0;<br></code></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs bash">void <span class="hljs-function"><span class="hljs-title">KBD</span></span>()<br>&#123;<br>		uchar row=0,cloumn=0,i,j;<br>		P3=0x0f;P44=0;P42=0;<br>		row=P3&amp;0x0f;<br>		P3=0xf0;P44=1;P42=1;<br>		<span class="hljs-keyword">if</span>(P44 == 0)			cloumn = 0x70;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(P42 == 0)		cloumn = 0xb0;<br>		<span class="hljs-keyword">else</span>					cloumn = P3 &amp; 0xf0;<br>		dat=~(cloumn|row);<br>		Trg=dat&amp;(dat^Cont);<br>		Cont=dat;<br>		<br>		<span class="hljs-keyword">if</span>(Trg)<br>		&#123;<br>			<span class="hljs-keyword">for</span>(i = 0; i &lt; 4; i++)<br>				<span class="hljs-keyword">for</span>(j = 0; j &lt; 4; j++)<br>					<span class="hljs-keyword">if</span>(Trg == (0x80 &gt;&gt; j | 0x01 &lt;&lt; <span class="hljs-string">i))</span><br><span class="hljs-string">					&#123;</span><br><span class="hljs-string">						keyvalue = keymap[i</span>][j];<br>						key=keyvalue;<br>						<span class="hljs-built_in">break</span>;<br>					&#125;<br>			<br>		&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><img src="/img/button/1.png" srcset="/img/loading.gif" lazyload><br>分析：当紫色位置按键被按下时，进入检测的代码时会有以下步骤：<br>1.列赋0，行都赋1 即P44、P42、P36、P35为低电平 ，P30-P33都是高电平<br>2.将P3和0X0F进行“与” 操作，得到具体哪一行被按下<br>3.列赋1，行都赋0 ，即P44、P42、P36、P35为高电平 ，P30-P33都是低电平<br>4.判断是哪列被按下， 将值赋给cloumn  </p>
@@ -303,6 +307,33 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">void Timer0_Init(void)		//1毫秒@11.0592MHz<br>&#123;<br>	AUXR |= 0x80;		//定时器时钟1T模式<br>	TMOD &amp;= 0xF0;		//设置定时器模式<br>	TL0 = 0xCD;		//设置定时初始值<br>	TH0 = 0xD4;		//设置定时初始值<br>    EA=1;<br>    ET0=1;<br>	TR0 = 1;		//定时器0开始计时<br>&#125;<br>void Timer0() interrupt 1<br>&#123;<br>    static unsigned char flag_cnt;<br>    flag_cnt++;<br>    <span class="hljs-keyword">if</span>(flag_cnt==10)<br>    &#123;        <br>        flag=1;<br>        flag_cnt=0;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>使用模板如下  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span>(flag)<br>&#123;<br>	KBD();<br>	flag=0;<br>	<span class="hljs-keyword">if</span>(key==4) //S4<br>	&#123;<br>		key=0;<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key==5) //S5<br>	&#123;<br>		key=0;<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key==9) //S9<br>	&#123;<br>		key=0;<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key==8) //S8<br>	&#123;<br>		key=0;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="DS18B20"><a href="#DS18B20" class="headerlink" title="DS18B20"></a>DS18B20</h1><p>DS18B20作为单总线协议的器件，只需要一根数据线就能进行通讯<br>查看底板的原理图可以找到DS18B20，这是单总线的接法，数据通过P1.4进行传输。<br><img src="/img/lqb/2.png" srcset="/img/loading.gif" lazyload><br>赛点数据包给了最底层的代码，所以我们只需要编写驱动就行了。<br><font color ="ff00ff">因为赛点资源包给的是51的通信程序，而比赛用的是15单片机，在相同晶振条件下15单片机的速度是51单片机的8-12倍，所以将oneire.c里面的延迟函数统统乘以10倍。</font><br>修改后的  onewire.c</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;onewire.h&quot;</span></span><br> <br><span class="hljs-comment">//单总线内部延时函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Delay_OneWire</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> t)</span>  </span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">while</span>(t--);<br>&#125;<br> <br><span class="hljs-comment">//单总线写操作</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Write_DS18B20</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> dat)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> i;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;i++)<br>	&#123;<br>		DQ = <span class="hljs-number">0</span>;<br>		DQ = dat&amp;<span class="hljs-number">0x01</span>;<br>		<span class="hljs-built_in">Delay_OneWire</span>(<span class="hljs-number">50</span>);<br>		DQ = <span class="hljs-number">1</span>;<br>		dat &gt;&gt;= <span class="hljs-number">1</span>;<br>	&#125;<br>	<span class="hljs-built_in">Delay_OneWire</span>(<span class="hljs-number">50</span>);<br>&#125;<br> <br><span class="hljs-comment">//单总线读操作</span><br><span class="hljs-function"><span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> <span class="hljs-title">Read_DS18B20</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> i;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> dat;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;i++)<br>	&#123;<br>		DQ = <span class="hljs-number">0</span>;<br>		dat &gt;&gt;= <span class="hljs-number">1</span>;<br>		DQ = <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(DQ)<br>		&#123;<br>			dat |= <span class="hljs-number">0x80</span>;<br>		&#125;	    <br>		<span class="hljs-built_in">Delay_OneWire</span>(<span class="hljs-number">50</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span> dat;<br>&#125;<br><span class="hljs-comment">//DS18B20初始化</span><br><span class="hljs-function">bit <span class="hljs-title">init_ds18b20</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>  	bit initflag = <span class="hljs-number">0</span>;<br>  	DQ = <span class="hljs-number">1</span>;<br>  	<span class="hljs-built_in">Delay_OneWire</span>(<span class="hljs-number">120</span>);<br>  	DQ = <span class="hljs-number">0</span>;<br>  	<span class="hljs-built_in">Delay_OneWire</span>(<span class="hljs-number">800</span>);<br>  	DQ = <span class="hljs-number">1</span>;<br>  	<span class="hljs-built_in">Delay_OneWire</span>(<span class="hljs-number">100</span>); <br>    initflag = DQ;     <br>  	<span class="hljs-built_in">Delay_OneWire</span>(<span class="hljs-number">50</span>);<br>  	<span class="hljs-keyword">return</span> initflag;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>以下是温度寄存器的格式最低的四位是小数部分，最高五位是符号位，针对此，可以对读出的数据进行处理来得到所需要的精度的数据。<br><img src="/img/lqb/3.png" srcset="/img/loading.gif" lazyload><br>以下是输出数据和和对应温度的转换。<br><img src="/img/lqb/4.png" srcset="/img/loading.gif" lazyload><br><font color ="dddd00">默认出厂时12位精度的。</font>对应的转换就是将读出的数据拼接<em>0.0625，但是为了更加方便的显示，更具精度要求进行倍数扩大。例如：<br>需求精度是小数点后两位，就在读出数据后</em>6.25。<br>需求精度是小数点后两位，就在读出数据后*62.5。<br><img src="/img/lqb/5.png" srcset="/img/loading.gif" lazyload><br>以下是从数据手册截取的，只用于读取温度数据的指令。  </p>
+<table>
+<thead>
+<tr>
+<th align="center">MASTER MODE</th>
+<th align="center">DATA (LSB FIRST)</th>
+<th align="center">COMMENTS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Tx</td>
+<td align="center">CCh</td>
+<td align="center">Master issues Skip ROM command.（主机发送跳过ROM指令）</td>
+</tr>
+<tr>
+<td align="center">Tx</td>
+<td align="center">44h</td>
+<td align="center">Master issues Convert T command.（主机发送 只转换一次温度而无其他数据指令）</td>
+</tr>
+<tr>
+<td align="center">Tx</td>
+<td align="center">BEh</td>
+<td align="center">Master issues Read Scratchpad command.（主机发送 读取暂存器的内容指令）</td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -348,8 +379,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>按键扫描</div>
-      <div>https://huerli.github.io/2022/12/31/蓝桥杯按键/</div>
+      <div>蓝桥杯</div>
+      <div>https://huerli.github.io/2023/01/15/蓝桥杯按键/</div>
     </div>
     <div class="license-meta">
       
@@ -361,7 +392,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月31日</div>
+          <div>2023年1月15日</div>
         </div>
       
       
@@ -393,9 +424,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/31/stm32-esp8266%E6%8E%A5%E5%85%A5%E4%BA%91/" title="stm32+esp8266接入云">
+                      <a href="/2023/02/12/fpga-demo/" title="fpga_demo">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">stm32+esp8266接入云</span>
+                        <span class="hidden-mobile">fpga_demo</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -403,8 +434,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/30/STM32%E6%97%A0%E7%BA%BF%E7%83%A7%E5%BD%95%E5%99%A8/" title="STM32无线烧录器">
-                        <span class="hidden-mobile">STM32无线烧录器</span>
+                      <a href="/2023/01/07/hexo-gitee/" title="hexo+gitee">
+                        <span class="hidden-mobile">hexo+gitee</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
