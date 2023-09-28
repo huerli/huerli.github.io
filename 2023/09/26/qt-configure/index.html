@@ -1,0 +1,1300 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huerli">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="qt-configure手册qt-configure手册   options 用法    -prefix &lt;dir&gt; 部署目录，如目标设备上所示。   -no-prefix 部署目录被设置为qtbase构建目录,可以代替-developer-build来避免安装，也可以避免-developer-build默认的-warnings-are-errors。   -extprefix &amp;lt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="qt-configure">
+<meta property="og:url" content="https://huerli.github.io/2023/09/26/qt-configure/index.html">
+<meta property="og:site_name" content="huerli Blog">
+<meta property="og:description" content="qt-configure手册qt-configure手册   options 用法    -prefix &lt;dir&gt; 部署目录，如目标设备上所示。   -no-prefix 部署目录被设置为qtbase构建目录,可以代替-developer-build来避免安装，也可以避免-developer-build默认的-warnings-are-errors。   -extprefix &amp;lt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-26T00:36:02.000Z">
+<meta property="article:modified_time" content="2023-09-26T01:22:24.944Z">
+<meta property="article:author" content="huerli">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>qt-configure - huerli Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huerli.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="qt-configure"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-26 08:36" pubdate>
+          2023年9月26日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          93 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">qt-configure</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="qt-configure手册"><a href="#qt-configure手册" class="headerlink" title="qt-configure手册"></a>qt-configure手册</h1><h2 id="qt-configure手册-1"><a href="#qt-configure手册-1" class="headerlink" title="qt-configure手册"></a>qt-configure手册</h2><table>
+<thead>
+<tr>
+<th align="center">options</th>
+<th align="center">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-prefix &lt;dir&gt;</td>
+<td align="center">部署目录，如目标设备上所示。</td>
+</tr>
+<tr>
+<td align="center">-no-prefix</td>
+<td align="center">部署目录被设置为qtbase构建目录,可以代替-developer-build来避免安装，也可以避免-developer-build默认的-warnings-are-errors。</td>
+</tr>
+<tr>
+<td align="center">-extprefix &lt;dir&gt;</td>
+<td align="center">安装目录，如在主机上看到的。[SYSROOT&#x2F;PREFIX]</td>
+</tr>
+<tr>
+<td align="center">-bindir &lt;dir&gt;</td>
+<td align="center">可执行文件 [PREFIX&#x2F;bin]</td>
+</tr>
+<tr>
+<td align="center">-headerdir &lt;dir&gt;</td>
+<td align="center">头文件 [PREFIX&#x2F;include]</td>
+</tr>
+<tr>
+<td align="center">-libdir &lt;dir&gt;</td>
+<td align="center">库文件 [PREFIX&#x2F;lib]</td>
+</tr>
+<tr>
+<td align="center">-archdatadir &lt;dir&gt;</td>
+<td align="center">依赖于arch的数据 [PREFIX]</td>
+</tr>
+<tr>
+<td align="center">-plugindir &lt;dir&gt;</td>
+<td align="center">插件 [ARCHDATADIR&#x2F;plugins]</td>
+</tr>
+<tr>
+<td align="center">-libexecdir &lt;dir&gt;</td>
+<td align="center">帮助文件 [ARCHDATADIR&#x2F;bin on Windows,ARCHDATADIR&#x2F;libexec otherwise]</td>
+</tr>
+<tr>
+<td align="center">-qmldir &lt;dir&gt;</td>
+<td align="center">QML 导入 [ARCHDATADIR&#x2F;qml]</td>
+</tr>
+<tr>
+<td align="center">-datadir &lt;dir&gt;</td>
+<td align="center">Arch-independent数据 [PREFIX]</td>
+</tr>
+<tr>
+<td align="center">-docdir &lt;dir&gt;</td>
+<td align="center">文档文件夹 [DATADIR&#x2F;doc]</td>
+</tr>
+<tr>
+<td align="center">-translationdir &lt;dir&gt;</td>
+<td align="center">翻译文件 [DATADIR&#x2F;translations]</td>
+</tr>
+<tr>
+<td align="center">-sysconfdir &lt;dir&gt;</td>
+<td align="center">系统设置文件 [PREFIX&#x2F;etc&#x2F;xdg]</td>
+</tr>
+<tr>
+<td align="center">-examplesdir &lt;dir&gt;</td>
+<td align="center">示例文件[PREFIX&#x2F;examples]</td>
+</tr>
+<tr>
+<td align="center">-testsdir &lt;dir&gt;</td>
+<td align="center">测试文件 [PREFIX&#x2F;tests]</td>
+</tr>
+<tr>
+<td align="center">-hostdatadir &lt;dir&gt;</td>
+<td align="center">qmake使用的数据 [PREFIX]</td>
+</tr>
+</tbody></table>
+<p>其余选项的约定:当一个选项的描述后面跟着括号中的值列表时，解释如下:’yes’代表裸选项;所有其他值都可能是选项的前缀，例如-no-gui。或者，也可以指定该值，例如，——gui&#x3D;yes。如果未指定，则按尝试的顺序列出值;’auto’是’yes&#x2F;no’的简写。单独的“yes”和“no”表示没有auto检测的二进制选项。  </p>
+<h3 id="配置源"><a href="#配置源" class="headerlink" title="配置源:"></a>配置源:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-help, -h</td>
+<td align="left">显示帮助菜单</td>
+</tr>
+<tr>
+<td align="left">-redo</td>
+<td align="left">使用以前使用的选项重新配置。另外，redo会删除CMakeCache.txt文件和CMakeFiles&#x2F;目录，并重新创建它们。可以传递其他选项，但不会通过-redo保存以供以后使用。</td>
+</tr>
+<tr>
+<td align="left">-feature-&lt;feature&gt;</td>
+<td align="left">使能&lt;feature&gt;</td>
+</tr>
+<tr>
+<td align="left">-no-feature-&lt;feature&gt;</td>
+<td align="left">失能&lt;feature&gt;</td>
+</tr>
+<tr>
+<td align="left">-list-features</td>
+<td align="left">列出可用的特性。注意，一些特性也有专用的命令行选项。</td>
+</tr>
+</tbody></table>
+<h3 id="构建选项"><a href="#构建选项" class="headerlink" title="构建选项:"></a>构建选项:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-cmake-generator <name></td>
+<td align="left">显式地为CMake指定构建系统生成器，而不是自动检测生成器。</td>
+</tr>
+<tr>
+<td align="left">-cmake-use-default-generator</td>
+<td align="left">关闭CMake构建系统生成器的auto检测。</td>
+</tr>
+<tr>
+<td align="left">-cmake-file-api</td>
+<td align="left">让CMake存储构建元数据以便将构建加载到IDE中。[no; yes if -developer-build]</td>
+</tr>
+<tr>
+<td align="left">-no-guess-compiler</td>
+<td align="left">不要使用目标mkspec中的编译器。</td>
+</tr>
+<tr>
+<td align="left">-release</td>
+<td align="left">在关闭调试的情况下构建Qt  [yes]</td>
+</tr>
+<tr>
+<td align="left">-debug</td>
+<td align="left">在打开调试的情况下构建Qt   [no]</td>
+</tr>
+<tr>
+<td align="left">-debug-and-release</td>
+<td align="left">构建两个版本的Qt，打开和不打开调试开关[yes] (仅限苹果和Windows)</td>
+</tr>
+<tr>
+<td align="left">-optimize-debug</td>
+<td align="left">在调试构建中启用调试友好的优化[auto] (不支持MSVC或Clang工具链)</td>
+</tr>
+<tr>
+<td align="left">-optimize-size</td>
+<td align="left">优化发布版本的大小而不是速度[no]</td>
+</tr>
+<tr>
+<td align="left">-force-debug-info</td>
+<td align="left">为发布版本创建符号文件[no]</td>
+</tr>
+<tr>
+<td align="left">-separate-debug-info</td>
+<td align="left">分割调试信息到单独的文件[no]</td>
+</tr>
+<tr>
+<td align="left">-gdb-index</td>
+<td align="left">索引调试信息，提高GDB的运行速度 [no; auto if -developer-build with debug info]</td>
+</tr>
+<tr>
+<td align="left">-gc-binaries</td>
+<td align="left">将每个函数或数据项放在自己的节中，并启用未使用节的链接器垃圾收集。[auto为静态构建，否则为no]</td>
+</tr>
+<tr>
+<td align="left">-force-asserts</td>
+<td align="left">即使在发布版本中也启用 Q_ASSERT[no]</td>
+</tr>
+<tr>
+<td align="left">-developer-build</td>
+<td align="left">编译并链接Qt以开发Qt本身（导出用于auto测试、额检查等）[no]</td>
+</tr>
+<tr>
+<td align="left">-shared</td>
+<td align="left">构建共享 Qt 库 [yes] (no for UIKit)</td>
+</tr>
+<tr>
+<td align="left">-static</td>
+<td align="left">构建静态 Qt 库[no] (yes for UIKit)</td>
+</tr>
+<tr>
+<td align="left">-framework</td>
+<td align="left">构建 Qt 框架包[yes] (Apple only)</td>
+</tr>
+<tr>
+<td align="left">-platform <target></td>
+<td align="left">为 qmake 配套文件选择 mkspec</td>
+</tr>
+<tr>
+<td align="left">-device <name></td>
+<td align="left">选择 devices&#x2F;mkspec 作为 qmake 配套文件</td>
+</tr>
+<tr>
+<td align="left">-device-option &lt;key&#x3D;value&gt;</td>
+<td align="left">添加设备 mkspec 选项</td>
+</tr>
+<tr>
+<td align="left">-appstore-compliant</td>
+<td align="left">禁用平台应用商店中不允许的代码。 对于默认情况下需要通过应用程序商店分发的平台（特别是 Android、iOS、tvOS 和 watchOS），此功能默认启用。[]auto</td>
+</tr>
+<tr>
+<td align="left">-qt-host-path <path></td>
+<td align="left">指定用于交叉编译的 Qt 主机构建路径。</td>
+</tr>
+<tr>
+<td align="left">-qtnamespace <name></td>
+<td align="left">将所有 Qt 库代码包装在“namespace <name> {…}”中。</td>
+</tr>
+<tr>
+<td align="left">-qtlibinfix <infix></td>
+<td align="left">将所有 libQt6*.so 重命名为 libQt6*<infix>.so</td>
+</tr>
+<tr>
+<td align="left">-testcocoon</td>
+<td align="left">使用 TestCocoon 代码覆盖率工具进行检测 [no]</td>
+</tr>
+<tr>
+<td align="left">-gcov</td>
+<td align="left">配备 GCov 代码覆盖率工具的仪器 [no]</td>
+</tr>
+<tr>
+<td align="left">-trace [backend]</td>
+<td align="left">启用带有跟踪点的检测。 当前支持的后端为“etw”(Windows) 和“lttng”(Linux)，或“yes”用于auto检测。 [no]</td>
+</tr>
+<tr>
+<td align="left">-sanitize {address</td>
+<td align="left">thread</td>
+</tr>
+<tr>
+<td align="left">-mips_dsp&#x2F;-mips_dspr2</td>
+<td align="left">使用MIPS DSP&#x2F;rev2指令 [auto]</td>
+</tr>
+<tr>
+<td align="left">-qreal <type></td>
+<td align="left">类型定义为指定的类型[double].注意:这会影响二进制兼容性。</td>
+</tr>
+<tr>
+<td align="left">-R <string></td>
+<td align="left">为Qt库添加一个显式的运行时库路径。支持相对于LIBDIR的路径。</td>
+</tr>
+<tr>
+<td align="left">-rpath</td>
+<td align="left">使用库安装路径作为运行时库路径链接Qt库和可执行文件。类似于-R LIBDIR。在Apple平台上，禁用此功能意味着对动态库和框架使用绝对安装名(基于LIBDIR)。[auto]</td>
+</tr>
+<tr>
+<td align="left">-reduce-exports</td>
+<td align="left">减少输出符号数量[auto]</td>
+</tr>
+<tr>
+<td align="left">-reduce-relocations</td>
+<td align="left">减少搬迁量[auto] (Unix only)</td>
+</tr>
+<tr>
+<td align="left">-plugin-manifests</td>
+<td align="left">将清单嵌入到插件中 [no] (Windows only)</td>
+</tr>
+<tr>
+<td align="left">-static-runtime</td>
+<td align="left">使用 -static，使用静态运行时 [no] (Windows only)</td>
+</tr>
+<tr>
+<td align="left">-pch</td>
+<td align="left">使用预编译头[auto]</td>
+</tr>
+<tr>
+<td align="left">-ltcg</td>
+<td align="left">使用链接时间代码生成[no]</td>
+</tr>
+<tr>
+<td align="left">-intelcet</td>
+<td align="left">使用英特尔控制流强制技术[no]</td>
+</tr>
+<tr>
+<td align="left">-linker [bfd,gold,lld,mold]</td>
+<td align="left">强制使用 GNU ld、GNU gold、LLVM&#x2F;LLD 或 Mold 链接器而不是默认链接器（仅限 GCC 和 clang）</td>
+</tr>
+<tr>
+<td align="left">-ccache</td>
+<td align="left">使用 ccache 编译器缓存 [no]（仅限 Unix）</td>
+</tr>
+<tr>
+<td align="left">-unity-build</td>
+<td align="left">启用 Unity (Jumbo) 构建</td>
+</tr>
+<tr>
+<td align="left">-unity-build-batch-size <int></td>
+<td align="left">Unity 构建用于创建 Unity 源文件的最大源文件数量 [8]</td>
+</tr>
+<tr>
+<td align="left">-warnings-are-errors</td>
+<td align="left">将警告视为错误 [否； 是的，如果-开发人员构建]</td>
+</tr>
+<tr>
+<td align="left">-disable-deprecated-up-to <version></td>
+<td align="left">将 QT_DISABLE_DEPRECATED_UP_TO 值设置为 &lt;版本&gt;。QT_DISABLE_DEPRECATED_UP_TO 用于从 API 和 ABI 中删除已弃用的方法。 <version> 是一个十六进制值，例如 0x060500 可用于删除 Qt 6.5.0 或更早版本中弃用的所有代码。 默认情况下，<version> 在 Windows 和非 Windows 上分别设置为 0x040000 和 0x050000。</td>
+</tr>
+</tbody></table>
+<h3 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-sysroot &lt;dir&gt;</td>
+<td align="left">将 &lt;dir&gt;设置为目标 sysroot</td>
+</tr>
+<tr>
+<td align="left">-pkg-config</td>
+<td align="left">使用 pkg-config [auto]（仅限 Unix）</td>
+</tr>
+<tr>
+<td align="left">-D &lt;string&gt;</td>
+<td align="left">传递额外的预处理器定义</td>
+</tr>
+<tr>
+<td align="left">-I &lt;string&gt;</td>
+<td align="left">传递附加包含路径</td>
+</tr>
+<tr>
+<td align="left">-L &lt;string&gt;</td>
+<td align="left">传递附加库路径</td>
+</tr>
+<tr>
+<td align="left">-F &lt;string&gt;</td>
+<td align="left">传递附加框架路径（仅限 Apple）</td>
+</tr>
+<tr>
+<td align="left">-sdk &lt;sdk&gt;</td>
+<td align="left">使用 Apple 提供的 SDK &lt;sdk&gt; 构建 Qt。 该参数应该是“xcodebuild -showsdks”列出的可用 SDK 之一。</td>
+</tr>
+<tr>
+<td align="left">-android-sdk path</td>
+<td align="left">设置Android SDK根路径[$ANDROID_SDK_ROOT]</td>
+</tr>
+<tr>
+<td align="left">-android-ndk path</td>
+<td align="left">设置Android NDK根路径[$ANDROID_NDK_ROOT]</td>
+</tr>
+<tr>
+<td align="left">-android-ndk-platform</td>
+<td align="left">设置Android平台</td>
+</tr>
+<tr>
+<td align="left">-android-abis</td>
+<td align="left">只能指定一个ABI，默认为：armeabi-v7a</td>
+</tr>
+<tr>
+<td align="left">-android-javac-target</td>
+<td align="left">设置 javac 构建目标版本 [8]</td>
+</tr>
+<tr>
+<td align="left">-android-javac-source</td>
+<td align="left">设置 javac 构建源版本 [8]</td>
+</tr>
+<tr>
+<td align="left">-android-style-assets</td>
+<td align="left">在运行时auto从设备中提取样式资源。 该选项使Android风格正常运行，但也使Android平台插件与LGPL2.1不兼容。 [yes]</td>
+</tr>
+</tbody></table>
+<h3 id="成分选择"><a href="#成分选择" class="headerlink" title="成分选择"></a>成分选择</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-submodules &lt;repo&gt;[,&lt;repo&gt;]</td>
+<td align="left">构建列出的存储库及其依赖的存储库，而不是所有签出的存储库。 该列表应以逗号分隔，例如 -submodules qtsvg,qtnetworkauth [默认是构建所有签出的存储库]</td>
+</tr>
+<tr>
+<td align="left">-skip &lt;repo&gt;[,&lt;repo&gt;]</td>
+<td align="left">从构建中排除一个或多个整个存储库。 该列表应以逗号分隔。 例如 -跳过 qtimageformats、qtsvg</td>
+</tr>
+<tr>
+<td align="left">-make <part></td>
+<td align="left">将 <part> 添加到要构建的零件列表中。 指定此选项将首先清除默认列表。 （允许值：库、工具、示例、测试、基准测试、手动测试、最小静态测试）[默认值：库和示例，如果不是交叉构建，也是工具，如果 -developer-build 也测试]</td>
+</tr>
+<tr>
+<td align="left">-nomake <part></td>
+<td align="left">从要构建的零件列表中排除 <part>。</td>
+</tr>
+<tr>
+<td align="left">-gui</td>
+<td align="left">构建 Qt GUI 模块和依赖项 [yes]</td>
+</tr>
+<tr>
+<td align="left">-widgets</td>
+<td align="left">构建 Qt Widgets 模块和依赖项 [yes]</td>
+</tr>
+<tr>
+<td align="left">-no-dbus</td>
+<td align="left">不构建 Qt D-Bus 模块 [Android 和 Windows 上默认]</td>
+</tr>
+<tr>
+<td align="left">-dbus-linked</td>
+<td align="left">构建 Qt D-Bus 并链接到 libdbus-1 [auto]</td>
+</tr>
+<tr>
+<td align="left">-dbus-runtime</td>
+<td align="left">构建 Qt D-Bus 并动态加载 libdbus-1 [no]</td>
+</tr>
+<tr>
+<td align="left">-accessibility</td>
+<td align="left">启用辅助功能支持 [yes] 注意：不建议禁用辅助功能。</td>
+</tr>
+</tbody></table>
+<h3 id="核心选项"><a href="#核心选项" class="headerlink" title="核心选项"></a>核心选项</h3><p>Qt 附带了一些第三方库的捆绑副本。 如果相应系统库的auto检测失败，则默认使用这些。</p>
+<table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-doubleconversion</td>
+<td align="left">选择使用的双转换库[system&#x2F;qt&#x2F;no] <br>没有暗示使用 sscanf_l 和 snprintf_l （不精确）<br/></td>
+</tr>
+<tr>
+<td align="left">-glib</td>
+<td align="left">启用 Glib 支持 [no; Unix [auto]]</td>
+</tr>
+<tr>
+<td align="left">-eventfd</td>
+<td align="left">启用 eventfd 支持</td>
+</tr>
+<tr>
+<td align="left">-inotify</td>
+<td align="left">启用 inotify 支持</td>
+</tr>
+<tr>
+<td align="left">-icu</td>
+<td align="left">启用 ICU 支持 [auto]</td>
+</tr>
+<tr>
+<td align="left">-pcre</td>
+<td align="left">选择使用的libpcre2 [system&#x2F;qt&#x2F;no]</td>
+</tr>
+<tr>
+<td align="left">-zlib</td>
+<td align="left">选择使用的zlib  [system&#x2F;qt]</td>
+</tr>
+<tr>
+<td align="left">Logging backends: <br> -journald  <br/> <br> -syslog <br/>   <br> -slog2  <br/></td>
+<td align="left"><br>Enable journald support [no] (Unix only)  <br/> <br>Enable syslog support [no] (Unix only)<br/>  <br>Enable slog2 support [auto] (QNX only)<br/></td>
+</tr>
+</tbody></table>
+<h3 id="网络选项"><a href="#网络选项" class="headerlink" title="网络选项"></a>网络选项</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-ssl</td>
+<td align="left">启用任一 SSL 支持方法 [auto]</td>
+</tr>
+<tr>
+<td align="left">-no-openssl</td>
+<td align="left">不要使用 OpenSSL [Apple 上的默认设置]</td>
+</tr>
+<tr>
+<td align="left">-openssl-linked</td>
+<td align="left">使用 OpenSSL 并链接到 libssl [no]</td>
+</tr>
+<tr>
+<td align="left">-openssl-runtime</td>
+<td align="left">使用 OpenSSL 并动态加载 libssl [auto]</td>
+</tr>
+<tr>
+<td align="left">-schannel</td>
+<td align="left">Use Secure Channel [auto] (Windows only)</td>
+</tr>
+<tr>
+<td align="left">-securetransport</td>
+<td align="left">使用 SecureTransport [auto]（仅限 Apple）</td>
+</tr>
+<tr>
+<td align="left">-sctp</td>
+<td align="left">启用 SCTP 支持 [no]</td>
+</tr>
+<tr>
+<td align="left">-libproxy</td>
+<td align="left">启用 libproxy [no]</td>
+</tr>
+<tr>
+<td align="left">-system-proxies</td>
+<td align="left">默认使用系统网络代理[yes]</td>
+</tr>
+</tbody></table>
+<h3 id="gui-printint-wedget选项"><a href="#gui-printint-wedget选项" class="headerlink" title="gui,printint,wedget选项"></a>gui,printint,wedget选项</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-cups</td>
+<td align="left">启用 CUPS 支持 [auto]（仅限 Unix）</td>
+</tr>
+<tr>
+<td align="left">-fontconfig</td>
+<td align="left">启用 Fontconfig 支持 [auto]（仅限 Unix）</td>
+</tr>
+<tr>
+<td align="left">-freetype</td>
+<td align="left">选择使用的FreeType [system&#x2F;qt&#x2F;no]</td>
+</tr>
+<tr>
+<td align="left">-harfbuzz</td>
+<td align="left">选择使用的 HarfBuzz-NG [system&#x2F;qt&#x2F;no]（在 Apple 和 Windows 上不会自动检测）</td>
+</tr>
+<tr>
+<td align="left">-gtk</td>
+<td align="left">启用 GTK 平台主题支持 [auto]</td>
+</tr>
+<tr>
+<td align="left">-no-opengl</td>
+<td align="left">禁用 OpenGL 支持</td>
+</tr>
+<tr>
+<td align="left">-opengl <api></td>
+<td align="left">启用 OpenGL 支持。 支持的 API：es2、桌面（Unix 上默认）、动态（仅限 Windows，Windows 上默认）</td>
+</tr>
+<tr>
+<td align="left">-opengles3</td>
+<td align="left">启用 OpenGL ES 3.x 支持而不是 ES 2.x [自动]</td>
+</tr>
+<tr>
+<td align="left">-egl</td>
+<td align="left">启用 EGL 支持 [自动]</td>
+</tr>
+<tr>
+<td align="left">-qpa <name></td>
+<td align="left">选择默认的 QPA 后端（例如 xcb、cocoa、windows） 用分号分隔的优先级列表。</td>
+</tr>
+<tr>
+<td align="left">-xcb-xlib</td>
+<td align="left">启用 Xcb-Xlib 支持 [auto]</td>
+</tr>
+</tbody></table>
+<h3 id="Platform-backends"><a href="#Platform-backends" class="headerlink" title="Platform backends:"></a>Platform backends:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>-direct2d<br/><br>-directfb<br/><br>-eglfs<br/><br>-gbm<br/><br>-kms<br/><br>-linuxfb<br/><br>-xcb <br/></td>
+<td align="left"><br>启用 Direct2D 支持 [auto]（仅限 Windows）<br/><br>启用 DirectFB 支持 [否]（仅限 Unix）<br/><br>启用 EGLFS 支持 [auto; Android 和 Windows 上没有]<br/><br>启用 GBM 后端 [auto]（仅限 Linux）<br/><br>启用 KMS 后端 [auto]（仅限 Linux）<br/><br>Enable Linux Framebuffer support [auto] (Linux only)<br/><br>启用 X11 支持 [auto]（仅限 Linux）<br/></td>
+</tr>
+</tbody></table>
+<h3 id="Input-backends"><a href="#Input-backends" class="headerlink" title="Input backends:"></a>Input backends:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>-libudev<br/><br>-evdev<br/><br>-libinput<br/><br>-mtdev<br/><br>-tslib<br/><br>-bundled-xcb-xinput<br/><br>-xkbcommon <br/></td>
+<td align="left"><br>启用 udev 支持 [自动]<br/><br>启用 evdev 支持 [自动]<br/><br>启用 libinput 支持 [自动]<br/><br>启用 mtdev 支持 [自动]<br/><br>启用 tslib 支持 [自动]<br/><br>使用捆绑的 XInput2 支持 [自动]<br/><br>启用键映射支持 [自动]<br/></td>
+</tr>
+</tbody></table>
+<h3 id="Image-formats"><a href="#Image-formats" class="headerlink" title="Image formats:"></a>Image formats:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>-gif<br/><br>-ico <br/><br>-libpng <br/><br>-libjpeg <br/></td>
+<td align="left"><br>启用对GIF的读取支持 [auto] <br/><br>启用对ICO的支持[yes]<br/><br> 选择使用的libpng [system&#x2F;qt&#x2F;no] <br/><br>选择libjpeg [system&#x2F;qt&#x2F;no]<br/></td>
+</tr>
+</tbody></table>
+<h3 id="Database-options"><a href="#Database-options" class="headerlink" title="Database options:"></a>Database options:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>-sql-<driver><br/><br>-sqlite<br/></td>
+<td align="left"><br>启用SQL插件。支持的驱动程序:db2 ibase mysql oci odbc psql sqlite <br/><br>选择使用sqlite [system&#x2F;qt]<br/></td>
+</tr>
+</tbody></table>
+<h3 id="Qt3D-options"><a href="#Qt3D-options" class="headerlink" title="Qt3D options:"></a>Qt3D options:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>  -assimp <br/><br>  -qt3d-profile-jobs <br/><br>  -qt3d-profile-gl<br/><br>  -qt3d-simd <br/><br>  -qt3d-render <br/><br> -qt3d-input <br/><br>  -qt3d-logic <br/><br>  -qt3d-extras<br/><br>  -qt3d-animation<br/></td>
+<td align="left"><br>选择已使用的assimp库[system&#x2F;qt&#x2F;no] <br/><br>启用工作剖析[no]<br/><br> 启用OpenGL分析[no] <br/><br>选择SIMD支持级别[no&#x2F;sse2&#x2F;avx2] <br/><br>启用Qt3D渲染方面[是] <br/><br>启用Qt3D输入方面[是] <br/><br> 启用Qt3D逻辑方面[是] <br/><br>启用Qt3D Extras方面[yes] <br/><br>启用Qt3D动画方面[是]<br/></td>
+</tr>
+</tbody></table>
+<h3 id="Further-image-format-options"><a href="#Further-image-format-options" class="headerlink" title="Further image format options:"></a>Further image format options:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>-jasper <br/><br> -mng <br/><br> -tiff <br/><br>-webp <br/></td>
+<td align="left"><br> 使用JasPer库启用JPEG-2000支持[no]<br/><br> 启用MNG支持[no]<br/><br> 启用TIFF支持[system&#x2F;qt&#x2F;no] <br/><br>启用WEBP支持[system&#x2F;qt&#x2F;no]<br/></td>
+</tr>
+</tbody></table>
+<h3 id="Multimedia-options"><a href="#Multimedia-options" class="headerlink" title="Multimedia options:"></a>Multimedia options:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br> -pulseaudio <br/><br> -alsa <br/><br> -no-gstreamer <br/><br> -gstreamer [version] <br/><br> -evr <br/></td>
+<td align="left"><br> 启用PulseAudio支持[auto] (仅限Unix) <br/><br> 启用ALSA支持[auto] (仅限Unix)  <br/><br> 禁用支持GStreamer <br/><br> 启用GStreamer支持[auto]如果没有参数，首先尝试1.0，然后是0.10。 <br/><br>  在WMF中启用EVR[auto]<br/></td>
+</tr>
+</tbody></table>
+<h3 id="QtQuick3D-options"><a href="#QtQuick3D-options" class="headerlink" title="QtQuick3D options:"></a>QtQuick3D options:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-assimp</td>
+<td align="left">选择已使用的assimp库[system&#x2F;qt&#x2F;no]</td>
+</tr>
+</tbody></table>
+<h3 id="TextToSpeech-options"><a href="#TextToSpeech-options" class="headerlink" title="TextToSpeech options:"></a>TextToSpeech options:</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>-flite <br/><br> -flite-alsa <br/><br> -speechd<br/></td>
+<td align="left"><br>启用Flite支持[auto] (仅限Unix) <br/><br>启用Flite与ALSA支持[auto] (仅限Unix) <br/><br>启用语音调度器支持[auto] (仅限Unix)<br/></td>
+</tr>
+</tbody></table>
+<h3 id="WebEngine-options"><a href="#WebEngine-options" class="headerlink" title="WebEngine options"></a>WebEngine options</h3><table>
+<thead>
+<tr>
+<th align="left">options</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><br>-webengine-alsa <br/> <br>  -webengine-pulseaudio <br/><br>  -webengine-embedded-build <br/><br>  -webengine-icu  <br/><br>  -webengine-ffmpeg  <br/><br>  -webengine-opus <br/><br>  -webengine-webp <br/><br>  -webengine-pepper-plugins <br/><br>-webengine-printing-and-pdf <br/> <br>  -webengine-proprietary-codecs  <br/><br>  -webengine-spellchecker <br/><br>-webengine-native-spellchecker <br/><br>  -webengine-webrtc <br/></td>
+<td align="left"><br> 启用ALSA支持[auto] (仅限Linux) <br/><br>启用PulseAudio支持[auto] (仅限Linux)<br/><br> 启用Linux嵌入式构建[auto] (仅限Linux) <br/><br> 使用系统ICU库[system&#x2F;qt] (仅限Linux) <br/><br>使用系统FFmpeg库[system&#x2F;qt] (仅限Linux) <br/><br>使用系统Opus库[system&#x2F;qt] (仅限Linux) <br/><br>使用系统WebP库[system&#x2F;qt] (仅限Linux)<br/><br> 启用Pepper Flash和Widevine插件[auto] <br/><br>启用列印及输出至PDF[自动]<br/><br> 启用对专有编解码器的支持[no] <br/><br>启用拼写检查器支持[yes] <br/><br>启用对本机拼写检查器的支持[no] (仅限macOS)<br/><br> 启用对WebRTC的支持 [auto]<br/></td>
+</tr>
+</tbody></table>
+<h1 id="组件详解"><a href="#组件详解" class="headerlink" title="组件详解"></a>组件详解</h1><h2 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h2><p>SSL是Secure Sockets Layer（安全套接层协议）的缩写。在计算机网络上，OpenSSL是一个开放源代码的软件库包，应用程序可以使用这个包来进行安全通信，避免窃听，同时确认另一端连接者的身份。这个包广泛被应用在互联网的网页服务器上。<br>SSL能使用户&#x2F;服务器应用之间的通信不被攻击者窃听，并且始终对服务器进行认证，还可选择对用户进行认证。SSL协议要求建立在可靠的传输层协议(TCP)之上。SSL协议的优势在于它是与应用层协议独立无关的，高层的应用层协议(例如：HTTP，FTP，TELNET等)能透明地建立于SSL协议之上。SSL协议在应用层协议通信之前就已经完成加密算法、通信密钥的协商及服务器认证工作。在此之后应用层协议所传送的数据都会被加密，从而保证通信的私密性。<br>SSL是利用公开密钥的加密技术（RSA）来作为用户端与服务器端在传送机密资料时的加密通讯协定。<br>OpenSSL采用C语言作为开发语言，这使得OpenSSL具有优秀的跨平台性。<br>OpenSSL整个软件包大概可以分成三个主要的功能部分：SSL协议库、应用程序以及密码算法库（对称加密，如AES，非对称加密）。<br>OpenSSL一共实现了4种非对称加密算法，包括DH算法、RSA算法、DSA算法和椭圆曲线算法（EC）。DH算法一般用于密钥交换。RSA算法既可以用于密钥交换，也可以用于数字签名，当然，如果你能够忍受其缓慢的速度，那么也可以用于数据加密。DSA算法则一般只用于数字签名。<br>OpenSSL实现了5种信息摘要算法，分别是MD2、MD5、MDC2、SHA（SHA1）和RIPEMD。SHA算法事实上包括了SHA和SHA1两种信息摘要算法。此外，OpenSSL还实现了DSS标准中规定的两种信息摘要算法DSS和DSS1。  </p>
+<h2 id="mqtt"><a href="#mqtt" class="headerlink" title="mqtt"></a>mqtt</h2><h2 id="Glib"><a href="#Glib" class="headerlink" title="Glib"></a>Glib</h2><h2 id="eventfd"><a href="#eventfd" class="headerlink" title="eventfd"></a>eventfd</h2><h2 id="inotify"><a href="#inotify" class="headerlink" title="inotify"></a>inotify</h2><h2 id="ICU"><a href="#ICU" class="headerlink" title="ICU"></a>ICU</h2><h2 id="libpcre2"><a href="#libpcre2" class="headerlink" title="libpcre2"></a>libpcre2</h2><h2 id="zlib"><a href="#zlib" class="headerlink" title="zlib"></a>zlib</h2><h2 id="journald"><a href="#journald" class="headerlink" title="journald"></a>journald</h2><h2 id="syslog"><a href="#syslog" class="headerlink" title="syslog"></a>syslog</h2><h2 id="slog2"><a href="#slog2" class="headerlink" title="slog2"></a>slog2</h2><h2 id="Fontconfig"><a href="#Fontconfig" class="headerlink" title="Fontconfig"></a>Fontconfig</h2><h2 id="FreeType"><a href="#FreeType" class="headerlink" title="FreeType"></a>FreeType</h2><h2 id="HarfBuzz-NG"><a href="#HarfBuzz-NG" class="headerlink" title="HarfBuzz-NG"></a>HarfBuzz-NG</h2><h2 id="GTK"><a href="#GTK" class="headerlink" title="GTK"></a>GTK</h2><p>GTK(GIMPTooKit)原本只是GIMP开发过程中用来管理图型界面的一套工具程序库.由于它使用LGPL声明,程序的开发者可以免费使用它来开发公共程序软件,免费软件或甚至商用软件.随者使用率及使用范围的增大,很快的GTK从只为了满足GIMP需求而存在的印象中跳出,发展成今日功能广泛的一套程序库.<br>GTK的稳定版已从1.2发行到现在的2.0.1.2版基本上只有GLIB跟GTK+两个组件,而GTK中另含有GDK(GIMP Drawing Kit)程疗库.一般我们直接使用的是GTK.其中几乎所有绘图功能都是透过GDK来完成的.GDK主要负责和×Window的程序库做低层的沟通.它也提供较为简化的程序界面给GTK使用. glib是最低层的程序库.它主要的功能是与系统上的 C library.打交道从而给予程序设计者一个一致的环境,不需为了各个UNIX系统上的些许不同而顾虑.2.0除了修改1.2之外，还增加了ATK(Accessibility Tool Kit)和Pango (pan希腊”全部”, go日文”语”).透过ATK使得在开发帮助残疾人士的工具软件上，不论是在可行性还是在难易度上都有相当大的改善. Pango的多国文字处理能力在全球化的今天更是一项不可或缺的功能. 此外专门处理图形的GDK-pixbuf也合并到了2.0 版的GTK+套件中.<br>GTK有一项特点是它完全使用C语言,但无论在设计上或是在应用上都一直有着OO的特点.对象之间不但有继承的特性,更有回调函数(callback function)构成事件驱动的特点.<br>GTK的世界十分广阔.诸如GNet等使用GLIB建立的网络公共程序库,虽然不是GTK+小组制作但也有越来越多人在使用.有兴趣的网友们可以去GTK及GNOME的官方网站.  </p>
+<h2 id="opengl"><a href="#opengl" class="headerlink" title="opengl"></a>opengl</h2><p>openGL是Open Graphics Library的缩写，指开源图形库。wikipedia 对其定义如下，它是一个跨语言，跨平台的应用程序接口，提供2D，3D图形渲染接口，操作在GPU之上，实现硬件加速渲染。<br>OpenGL用于桌面系统，在移动平台上的是其嵌入式的版本，叫做OpenGL ES（OpenGL Embedded Systems。OpenGL ES 1.0把三维带进了移动平台，2.0取代了大多数旧的API，替换为新的可编程API；2012年8月，Khronos组织确定了3.0的规范，并向后兼容了OpenGL ES 2.0。</p>
+<h2 id="EGL"><a href="#EGL" class="headerlink" title="EGL"></a>EGL</h2><h2 id="QPA"><a href="#QPA" class="headerlink" title="QPA"></a>QPA</h2><h2 id="Xcb-Xlib"><a href="#Xcb-Xlib" class="headerlink" title="Xcb-Xlib"></a>Xcb-Xlib</h2><h2 id="Direct2D"><a href="#Direct2D" class="headerlink" title="Direct2D"></a>Direct2D</h2><h2 id="DirectFB"><a href="#DirectFB" class="headerlink" title="DirectFB"></a>DirectFB</h2><h2 id="EGLFS"><a href="#EGLFS" class="headerlink" title="EGLFS"></a>EGLFS</h2><p>EGL是OpenGL和本地视窗系统中间的一个接口。Qt可以使用EGL作为context和surface管理，然而，API包含非指定平台部分：本地视窗的创建必须通过特定平台的方式创建。因此，就需要对板子或者指定GPU修改代码。有两种修改的方式：一种是通过eglfs hooks，这种方式可以是一个单源文件编译进平台插件中，第二种方式就是动态加载EGL设备集成插件。<br>EGLFS是一个为了Qt5应用运行的平台插件，Qt5运行在EGL和OpenGL ES2.0之上而且没有真实的视窗系统（比如 X11 Wayland）。对于Qt Quick 2和本地OpenGL应用，它也支持软件渲染视窗（例如QWidget）。在OpenGL应用中，widget的内容是使用CPU转化为图像渲染的，然后通过这个插件上传到纹理和混合。<br>这就是为什么当代嵌入式Linuxy设备建议包含一个GPU的原因。EGLFS强制第一个顶级窗口（QWidget或者QQucikView）为全屏。这个窗口也被选择成为根widget窗口，其它的顶级窗口（例如对话框，弹出菜单或者下拉菜单）都放入第一个窗口中。这很有必要，因为使用EGLFS总有一个真实存在的本地窗口和EGL窗口外观，并且其它的都属于第一个创建的widget或者window. 这种方式可以工作得很好，有一个主窗口存在在整个应用的生命周期里，其它的后来创建的所有的窗口都属于第一个窗口。</p>
+<h2 id="linuxfb"><a href="#linuxfb" class="headerlink" title="linuxfb"></a>linuxfb</h2><p>Linux framebuffer（&#x2F;dev&#x2F;fb）是用来屏蔽图形显示硬件的抽象层。如果不对硬件进行抽象屏蔽，不同硬件显卡，可能需要编写不同的驱动和应用程序。而引入framebuffer进行统一的抽象后，开发人员可以不用关心硬件平台的差异，以统一的方式编写应用层和较高内核层程序。linuxfb提供接口，让用户的应用程序可以直接访问framebuffer（显示缓存区）来实现显示功能，而不用关心framebuffer的具体实现细节。<br>framebuffer提供了显卡的抽象描述，同时代表了显卡上的显存，往显示缓存中写入特定格式的数据就意味着向屏幕输出内容。用户将framebuffer映射到进程空间后，就可以直接进行读写操作，写操作会直接反映在屏幕显示的画面上。这种方式尤其适用于没有实际物理显存的嵌入式设备。<br>带GPU硬件的设备，在显示时，图形的旋转、渲染等，大部分由GPU完成。而framebuffer仅仅是一个映射，将用户写入的信息直接显示在屏幕上，所以所以的图形处理，都是在用户层实现、由CPU完成，因而CPU的负担会加重。</p>
+<h2 id="GBM"><a href="#GBM" class="headerlink" title="GBM"></a>GBM</h2><h2 id="KMS"><a href="#KMS" class="headerlink" title="KMS"></a>KMS</h2><h2 id="X11"><a href="#X11" class="headerlink" title="X11"></a>X11</h2><h2 id="udev"><a href="#udev" class="headerlink" title="udev"></a>udev</h2><h2 id="evdev"><a href="#evdev" class="headerlink" title="evdev"></a>evdev</h2><h2 id="libinput"><a href="#libinput" class="headerlink" title="libinput"></a>libinput</h2><h2 id="mtdev"><a href="#mtdev" class="headerlink" title="mtdev"></a>mtdev</h2><h2 id="tslib"><a href="#tslib" class="headerlink" title="tslib"></a>tslib</h2><h2 id="XInput2"><a href="#XInput2" class="headerlink" title="XInput2"></a>XInput2</h2><h2 id="GIF"><a href="#GIF" class="headerlink" title="GIF"></a>GIF</h2><h2 id="ICO"><a href="#ICO" class="headerlink" title="ICO"></a>ICO</h2><h2 id="libjpeg"><a href="#libjpeg" class="headerlink" title="libjpeg"></a>libjpeg</h2><h2 id="libpng"><a href="#libpng" class="headerlink" title="libpng"></a>libpng</h2><h2 id="JasPer"><a href="#JasPer" class="headerlink" title="JasPer"></a>JasPer</h2><h2 id="MNG"><a href="#MNG" class="headerlink" title="MNG"></a>MNG</h2><h2 id="TIFF"><a href="#TIFF" class="headerlink" title="TIFF"></a>TIFF</h2><h2 id="WEBP"><a href="#WEBP" class="headerlink" title="WEBP"></a>WEBP</h2><h2 id="PulseAudio"><a href="#PulseAudio" class="headerlink" title="PulseAudio"></a>PulseAudio</h2><h2 id="ALSA"><a href="#ALSA" class="headerlink" title="ALSA"></a>ALSA</h2><h2 id="GStreamer"><a href="#GStreamer" class="headerlink" title="GStreamer"></a>GStreamer</h2><h2 id="WMF"><a href="#WMF" class="headerlink" title="WMF"></a>WMF</h2><h2 id="assimp"><a href="#assimp" class="headerlink" title="assimp"></a>assimp</h2><h2 id="Flite"><a href="#Flite" class="headerlink" title="Flite"></a>Flite</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>qt-configure</div>
+      <div>https://huerli.github.io/2023/09/26/qt-configure/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huerli</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/26/%E8%93%9D%E7%89%99/" title="蓝牙">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">蓝牙</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/12/RV1126/" title="RV1126">
+                        <span class="hidden-mobile">RV1126</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

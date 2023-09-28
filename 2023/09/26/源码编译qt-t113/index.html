@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huerli">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="从源码编译qt6.5.2添加交叉编译器路径到环境变量12export STAGING_DIR&#x3D;&#x2F;home&#x2F;huerli&#x2F;Tina-Linux&#x2F;out&#x2F;t113-mq_r&#x2F;staging_direxport PATH&#x3D;$PATH:&#x2F;home&#x2F;huerli&#x2F;Tina-Linux&#x2F;prebuilt&#x2F;gcc&#x2F;linux-x86&#x2F;arm&#x2F;toolchain-sunxi-musl&#x2F;toolchain&#x2F;bin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码编译qt-t113">
+<meta property="og:url" content="https://huerli.github.io/2023/09/26/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91qt-t113/index.html">
+<meta property="og:site_name" content="huerli Blog">
+<meta property="og:description" content="从源码编译qt6.5.2添加交叉编译器路径到环境变量12export STAGING_DIR&#x3D;&#x2F;home&#x2F;huerli&#x2F;Tina-Linux&#x2F;out&#x2F;t113-mq_r&#x2F;staging_direxport PATH&#x3D;$PATH:&#x2F;home&#x2F;huerli&#x2F;Tina-Linux&#x2F;prebuilt&#x2F;gcc&#x2F;linux-x86&#x2F;arm&#x2F;toolchain-sunxi-musl&#x2F;toolchain&#x2F;bin">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-26T01:10:14.000Z">
+<meta property="article:modified_time" content="2023-09-26T14:07:58.896Z">
+<meta property="article:author" content="huerli">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>源码编译qt-t113 - huerli Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huerli.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="源码编译qt-t113"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-26 09:10" pubdate>
+          2023年9月26日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          88 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">源码编译qt-t113</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="从源码编译qt6-5-2"><a href="#从源码编译qt6-5-2" class="headerlink" title="从源码编译qt6.5.2"></a>从源码编译qt6.5.2</h1><h2 id="添加交叉编译器路径到环境变量"><a href="#添加交叉编译器路径到环境变量" class="headerlink" title="添加交叉编译器路径到环境变量"></a>添加交叉编译器路径到环境变量</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">export STAGING_DIR=/home/huerli/Tina-Linux/out/t113-mq_r/staging_dir<br>export PATH=$PATH:/home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin<br></code></pre></td></tr></table></figure>
+<p>查看交叉编译器</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">arm-openwrt-linux-gcc <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>
+<h2 id="源码编译tslib"><a href="#源码编译tslib" class="headerlink" title="源码编译tslib"></a>源码编译tslib</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">- sudo apt-get install automake autoconf libtool libsysfs-dev<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">- cd /home/huerli(你的位置)<br>- git clone https://github.com/libts/tslib.git<br>- cd tslib<br>- ./autogen.sh<br>- mkdir tmp<br>- echo &quot;ac_cv_func_malloc_0_nonnull=yes&quot; &gt; arm-linux.cache<br>- ./configure --host=arm-openwrt-linux -cache-file=arm-linux.cache -prefix=$(pwd)/tmp<br>- make<br>- make install <br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install bison build-essential clang flex gperf libatspi2.0-dev libbluetooth-dev libclang-dev libcups2-dev libdrm-dev libegl1-mesa-dev libfontconfig1-dev libfreetype6-dev libgstreamer1.0-dev libhunspell-dev libnss3-dev libopengl-dev libpulse-dev libssl-dev libts-dev libx11-dev libx11-xcb-dev libxcb-glx0-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-sync-dev libxcb-util-dev libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-xkb-dev libxcb1-dev libxcomposite-dev libxcursor-dev libxdamage-dev libxext-dev libxfixes-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libxkbfile-dev libxrandr-dev libxrender-dev libxshmfence-dev libxshmfence1 llvm ninja-build nodejs python-is-python2 python2<br></code></pre></td></tr></table></figure>
+<h2 id="源码编译cmake3-21"><a href="#源码编译cmake3-21" class="headerlink" title="源码编译cmake3.21"></a>源码编译cmake3.21</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">- wget https://github.com/Kitware/CMake/releases/download/v3.27.6/cmake-3.27.6.tar.gz<br>- tar xf cmake-3.27.6.tar.gz<br>- cd cmake-3.27.6<br>- ./configure  <br>- make  <br>- sudo make install  <br>- cmake -version<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">- wget https://mirrors.cloud.tencent.com/qt/archive/qt/6.5/6.5.2/single/qt-everywhere-src-6.5.2.tar.xz<br>- tar xf qt-everywhere-src-6.5.2.tar.xz<br>- cd qt-everywhere-src-6.5.2<br>- vim qtbase/mkspecs/linux-arm-gnueabi-g++/qmake.conf<br></code></pre></td></tr></table></figure>
+<h2 id="编译主机"><a href="#编译主机" class="headerlink" title="编译主机"></a>编译主机</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
+<p>将代码替换为下方代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs config">#<br># qmake configuration for building with arm-linux-gnueabi-g++<br>#<br><br>MAKEFILE_GENERATOR      = UNIX<br>CONFIG                 += incremental<br>QMAKE_INCREMENTAL_STYLE = sublib<br><br><br>#QT_QPA_DEFAULT_PLATFORM  = linuxfb<br>#QMAKE_CFLAGS   += -O2 -march=armv7-a -mtune=cortex-a7 -mfpu=neon -mfloat-abi=hard<br>#QMAKE_CXXFLAGS      += -O2 -march=armv7-a -mtune=cortex-a7 -mfpu=neon -mfloat-abi=hard<br><br>include(../common/linux.conf)<br>include(../common/gcc-base-unix.conf)<br>include(../common/g++-unix.conf)<br><br># modifications to g++.conf<br>QMAKE_CC                = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-gcc<br>QMAKE_CXX               = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-g++<br>QMAKE_LINK              = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-g++<br>QMAKE_LINK_SHLIB        = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-g++<br><br># modifications to linux.conf<br>QMAKE_AR                = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-ar cqs<br>QMAKE_OBJCOPY           = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-objcopy<br>QMAKE_NM                = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-nm -P<br>QMAKE_STRIP             = /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-strip<br>load(qt_config)<br></code></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">- ./configure -prefix /opt/qt6.5.2 -opensource -platform linux-arm-gnueabi-g++ -device linux-arm-gnueabi-g++ -no-opengl -nomake examples<br>- cmake --build . --parallel<br>- sudo cmake  --install .<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">- ./configure -prefix /opt/qt6.5.2 -release -opensource -platform arm-openwrt-g++ -device arm-openwrt-g++ -no-opengl -nomake examples -device-option CROSS_COMPILE=arm-openwrt-linux-<br>- cmake --build . --parallel<br>- sudo cmake  --install .<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-comment"># 设置目标系统、处理器架构</span><br><span class="hljs-keyword">set</span>(CMAKE_SYSTEM_NAME Linux)<br><span class="hljs-keyword">set</span>(CMAKE_SYSTEM_PROCESSOR arm)<br><br><span class="hljs-comment"># 设置工具链目录</span><br><br><br><span class="hljs-keyword">set</span>(TOOL_CHAIN_INCLUDE /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/<span class="hljs-keyword">include</span> )<br><span class="hljs-keyword">set</span>(TOOL_CHAIN_LIB  /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/lib )<br><br><span class="hljs-comment"># 设置编译器位置</span><br><span class="hljs-keyword">set</span>(CMAKE_C_COMPILER /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-gcc)<br><span class="hljs-keyword">set</span>(CMAKE_CXX_COMPILER /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-g++)<br><br><span class="hljs-comment"># 设置cmake查找主路径</span><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH <span class="hljs-variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/aarch64-none-linux-gnu)<br><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)<br><span class="hljs-comment"># 只在指定目录下查找库文件</span><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)<br><span class="hljs-comment"># 只在指定目录下查找头文件</span><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)<br><span class="hljs-comment"># 只在指定目录下查找依赖包</span><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)<br><br><span class="hljs-comment"># 包含工具链文件</span><br><span class="hljs-keyword">include_directories</span>(<br>        /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/<span class="hljs-keyword">include</span>)<br><br><span class="hljs-comment"># 设置CMAKE_INCLUDE_PATH</span><br><span class="hljs-keyword">set</span>(CMAKE_INCLUDE_PATH <span class="hljs-variable">$&#123;TOOL_CHAIN_INCLUDE&#125;</span>)<br><br><span class="hljs-comment"># 设置CMAKE_LIBRARY_PATH</span><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_PATH <span class="hljs-variable">$&#123;TOOL_CHAIN_LIB&#125;</span>)<br><br></code></pre></td></tr></table></figure>
+
+
+<p>..&#x2F;configure -release -opensource -device arm-openwrt-linux-g++ -no-opengl   -prefix &#x2F;opt&#x2F;t113-qt-v3  -device-option CROSS_COMPILE&#x3D;arm-openwrt-linux- -qt-host-path $HOME&#x2F;qt-host – -DCMAKE_TOOLCHAIN_FILE&#x3D;toolchain.cmake</p>
+<p>..&#x2F;qt5&#x2F;configure -release -opengl es2 -nomake examples -nomake tests -qt-host-path $HOME&#x2F;qt-host -extprefix $HOME&#x2F;qt-raspi -prefix &#x2F;usr&#x2F;local&#x2F;qt6 -device linux-rasp-pi4-aarch64 -device-option CROSS_COMPILE&#x3D;aarch64-linux-gnu- – -DCMAKE_TOOLCHAIN_FILE&#x3D;$HOME&#x2F;toolchain.cmake -DQT_FEATURE_xcb&#x3D;ON -DFEATURE_xcb_xlib&#x3D;ON -DQT_FEATURE_xlib&#x3D;ON</p>
+<h2 id="查看qmake"><a href="#查看qmake" class="headerlink" title="查看qmake"></a>查看qmake</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">- vim ~/.bashrc<br>写入<br>- export PATH=$PATH:/opt/qt6.5.2/bin<br>- source ~/.bashrc<br>- qmake -query<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 设置目标系统、处理器架构</span><br>set(CMAKE_SYSTEM_NAME Linux)<br>set(CMAKE_SYSTEM_PROCESSOR arm)<br><br><span class="hljs-comment"># 设置工具链目录</span><br><br><br>set(TOOL_CHAIN_INCLUDE <span class="hljs-regexp">/home/</span>huerli<span class="hljs-regexp">/Tina-Linux/</span>prebuilt<span class="hljs-regexp">/gcc/</span>linux-x86<span class="hljs-regexp">/arm/</span>toolchain-sunxi-musl<span class="hljs-regexp">/toolchain/</span>)<br>set(TOOL_CHAIN_LIB  <span class="hljs-regexp">/home/</span>huerli<span class="hljs-regexp">/Tina-Linux/</span>prebuilt<span class="hljs-regexp">/gcc/</span>linux-x86<span class="hljs-regexp">/arm/</span>toolchain-sunxi-musl<span class="hljs-regexp">/toolchain/</span>)<br><br><span class="hljs-comment"># 设置编译器位置</span><br>set(CMAKE_C_COMPILER <span class="hljs-regexp">/home/</span>huerli<span class="hljs-regexp">/Tina-Linux/</span>prebuilt<span class="hljs-regexp">/gcc/</span>linux-x86<span class="hljs-regexp">/arm/</span>toolchain-sunxi-musl<span class="hljs-regexp">/toolchain/</span>bin/arm-openwrt-linux-gcc.bin)<br>set(CMAKE_CXX_COMPILER <span class="hljs-regexp">/home/</span>huerli<span class="hljs-regexp">/Tina-Linux/</span>prebuilt<span class="hljs-regexp">/gcc/</span>linux-x86<span class="hljs-regexp">/arm/</span>toolchain-sunxi-musl<span class="hljs-regexp">/toolchain/</span>bin/arm-openwrt-linux-g++.bin)<br><br><span class="hljs-comment"># 设置cmake查找主路径</span><br>set(CMAKE_FIND_ROOT_PATH <span class="hljs-regexp">/home/</span>huerli<span class="hljs-regexp">/Tina-Linux/</span>prebuilt<span class="hljs-regexp">/gcc/</span>linux-x86<span class="hljs-regexp">/arm/</span>toolchain-sunxi-musl)<br><br>set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)<br><span class="hljs-comment"># 只在指定目录下查找库文件</span><br>set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)<br><span class="hljs-comment"># 只在指定目录下查找头文件</span><br>set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)<br><span class="hljs-comment"># 只在指定目录下查找依赖包</span><br>set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)<br><br><span class="hljs-comment"># 包含工具链文件</span><br>include_directories(<br>        <span class="hljs-regexp">/home/</span>huerli<span class="hljs-regexp">/Tina-Linux/</span>prebuilt<span class="hljs-regexp">/gcc/</span>linux-x86<span class="hljs-regexp">/arm/</span>toolchain-sunxi-musl<span class="hljs-regexp">/toolchain/i</span>nclude)<br><br><span class="hljs-comment"># 设置CMAKE_INCLUDE_PATH</span><br>set(CMAKE_INCLUDE_PATH <span class="hljs-variable">$&#123;TOOL_CHAIN_INCLUDE&#125;</span>)<br><br><span class="hljs-comment"># 设置CMAKE_LIBRARY_PATH</span><br>set(CMAKE_LIBRARY_PATH <span class="hljs-variable">$&#123;TOOL_CHAIN_LIB&#125;</span>)<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://wiki.qt.io/Cross-Compile_Qt_6_for_Raspberry_Pi#Further_Readings">qt wiki</a><br><a target="_blank" rel="noopener" href="https://doc.embedfire.com/linux/rk356x/Qt/zh/latest/lubancat_qt/install/install_arm_3.html">野火教程</a></p>
+<p>-DQT_FEATURE_xcb&#x3D;ON -DFEATURE_xcb_xlib&#x3D;ON -DQT_FEATURE_xlib&#x3D;ON</p>
+<p>sudo apt-get install libgl1-mesa-dev build-essential libglu1-mesa-dev freeglut3-dev build-essential libgl1-mesa-dev</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs c">cmake_minimum_required(VERSION <span class="hljs-number">3.18</span>)<br>include_guard(GLOBAL)<br><br><span class="hljs-built_in">set</span>(CMAKE_SYSTEM_NAME Linux)<br><span class="hljs-built_in">set</span>(CMAKE_SYSTEM_PROCESSOR arm)<br><br><span class="hljs-built_in">set</span>(TARGET_SYSROOT /home/huerli/t113-sysroot)<br><span class="hljs-built_in">set</span>(CMAKE_SYSROOT $&#123;TARGET_SYSROOT&#125;)<br><br><span class="hljs-built_in">set</span>(ENV&#123;PKG_CONFIG_PATH&#125; $PKG_CONFIG_PATH:/home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux/pkgconfig)<br><span class="hljs-built_in">set</span>(ENV&#123;PKG_CONFIG_LIBDIR&#125; /usr/lib/pkgconfig:/usr/share/pkgconfig/:$&#123;TARGET_SYSROOT&#125;/usr/lib/arm-openwrt-linux/pkgconfig:$&#123;TARGET_SYSROOT&#125;/usr/lib/pkgconfig)<br><span class="hljs-built_in">set</span>(ENV&#123;PKG_CONFIG_SYSROOT_DIR&#125; $&#123;CMAKE_SYSROOT&#125;)<br><br><span class="hljs-meta"># <span class="hljs-keyword">if</span> you use other version of gcc and g++ than gcc/g++ 9, you must change the following variables</span><br><span class="hljs-built_in">set</span>(CMAKE_C_COMPILER /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-gcc)<br><span class="hljs-built_in">set</span>(CMAKE_CXX_COMPILER /home/huerli/Tina-Linux/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-g++)<br><br><span class="hljs-built_in">set</span>(CMAKE_C_FLAGS <span class="hljs-string">&quot;$&#123;CMAKE_C_FLAGS&#125; -I$&#123;TARGET_SYSROOT&#125;/usr/include&quot;</span>)<br><span class="hljs-built_in">set</span>(CMAKE_CXX_FLAGS <span class="hljs-string">&quot;$&#123;CMAKE_C_FLAGS&#125;&quot;</span>)<br><br><span class="hljs-built_in">set</span>(QT_COMPILER_FLAGS <span class="hljs-string">&quot;-march=armv7-a&quot;</span>)<br><span class="hljs-built_in">set</span>(QT_COMPILER_FLAGS_RELEASE <span class="hljs-string">&quot;-O2 -pipe&quot;</span>)<br><span class="hljs-built_in">set</span>(QT_LINKER_FLAGS <span class="hljs-string">&quot;-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed&quot;</span>)<br><br><span class="hljs-built_in">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)<br><span class="hljs-built_in">set</span>(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)<br><span class="hljs-built_in">set</span>(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)<br><span class="hljs-built_in">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)<br><span class="hljs-built_in">set</span>(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)<br><span class="hljs-built_in">set</span>(CMAKE_BUILD_RPATH $&#123;TARGET_SYSROOT&#125;)<br><br><br>include(CMakeInitializeConfigs)<br><br>function(cmake_initialize_per_config_variable _PREFIX _DOCSTRING)<br>  <span class="hljs-keyword">if</span> (_PREFIX MATCHES <span class="hljs-string">&quot;CMAKE_(C|CXX|ASM)_FLAGS&quot;</span>)<br>    <span class="hljs-built_in">set</span>(CMAKE_$&#123;CMAKE_MATCH_1&#125;_FLAGS_INIT <span class="hljs-string">&quot;$&#123;QT_COMPILER_FLAGS&#125;&quot;</span>)<br>        <br>    foreach (config DEBUG RELEASE MINSIZEREL RELWITHDEBINFO)<br>      <span class="hljs-keyword">if</span> (DEFINED QT_COMPILER_FLAGS_$&#123;config&#125;)<br>        <span class="hljs-built_in">set</span>(CMAKE_$&#123;CMAKE_MATCH_1&#125;_FLAGS_$&#123;config&#125;_INIT <span class="hljs-string">&quot;$&#123;QT_COMPILER_FLAGS_$&#123;config&#125;&#125;&quot;</span>)<br>      endif()<br>    endforeach()<br>  endif()<br><br><br>  <span class="hljs-keyword">if</span> (_PREFIX MATCHES <span class="hljs-string">&quot;CMAKE_(SHARED|MODULE|EXE)_LINKER_FLAGS&quot;</span>)<br>    foreach (config SHARED MODULE EXE)<br>      <span class="hljs-built_in">set</span>(CMAKE_$&#123;config&#125;_LINKER_FLAGS_INIT <span class="hljs-string">&quot;$&#123;QT_LINKER_FLAGS&#125;&quot;</span>)<br>    endforeach()<br>  endif()<br><br>  _cmake_initialize_per_config_variable($&#123;ARGV&#125;)<br>endfunction()<br><br><span class="hljs-built_in">set</span>(XCB_PATH_VARIABLE $&#123;TARGET_SYSROOT&#125;)<br><br><span class="hljs-built_in">set</span>(GL_INC_DIR $&#123;TARGET_SYSROOT&#125;/usr/include)<br><span class="hljs-built_in">set</span>(GL_LIB_DIR $&#123;TARGET_SYSROOT&#125;:$&#123;TARGET_SYSROOT&#125;/usr/lib/arm-openwrt-linux/:$&#123;TARGET_SYSROOT&#125;/usr:$&#123;TARGET_SYSROOT&#125;/usr/lib)<br><br><span class="hljs-built_in">set</span>(EGL_INCLUDE_DIR $&#123;GL_INC_DIR&#125;)<br><span class="hljs-built_in">set</span>(EGL_LIBRARY $&#123;XCB_PATH_VARIABLE&#125;/usr/lib/arm-openwrt-linux/libEGL.so)<br><br><span class="hljs-built_in">set</span>(OPENGL_INCLUDE_DIR $&#123;GL_INC_DIR&#125;)<br><span class="hljs-built_in">set</span>(OPENGL_opengl_LIBRARY $&#123;XCB_PATH_VARIABLE&#125;/usr/lib/arm-openwrt-linux/libOpenGL.so)<br><br><span class="hljs-built_in">set</span>(GLESv2_INCLUDE_DIR $&#123;GL_INC_DIR&#125;)<br><span class="hljs-built_in">set</span>(GLIB_LIBRARY $&#123;XCB_PATH_VARIABLE&#125;/usr/lib/arm-openwrt-linux/libGLESv2.so)<br><br><span class="hljs-built_in">set</span>(GLESv2_INCLUDE_DIR $&#123;GL_INC_DIR&#125;)<br><span class="hljs-built_in">set</span>(GLESv2_LIBRARY $&#123;XCB_PATH_VARIABLE&#125;/usr/lib/arm-openwrt-linux/libGLESv2.so)<br><br><span class="hljs-built_in">set</span>(gbm_INCLUDE_DIR $&#123;GL_INC_DIR&#125;)<br><span class="hljs-built_in">set</span>(gbm_LIBRARY $&#123;XCB_PATH_VARIABLE&#125;/usr/lib/arm-openwrt-linux/libgbm.so)<br><br><span class="hljs-built_in">set</span>(Libdrm_INCLUDE_DIR $&#123;GL_INC_DIR&#125;)<br><span class="hljs-built_in">set</span>(Libdrm_LIBRARY $&#123;XCB_PATH_VARIABLE&#125;/usr/lib/arm-openwrt-linux/libdrm.so)<br><br><span class="hljs-built_in">set</span>(XCB_XCB_INCLUDE_DIR $&#123;GL_INC_DIR&#125;)<br><span class="hljs-built_in">set</span>(XCB_XCB_LIBRARY $&#123;XCB_PATH_VARIABLE&#125;/usr/lib/arm-openwrt-linux/libxcb.so)<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>源码编译qt-t113</div>
+      <div>https://huerli.github.io/2023/09/26/源码编译qt-t113/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huerli</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/28/t113-%E4%B8%BB%E7%BA%BF/" title="t113-主线">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">t113-主线</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/26/%E7%BC%96%E8%AF%91T113-tina/" title="编译T113-tina">
+                        <span class="hidden-mobile">编译T113-tina</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

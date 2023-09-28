@@ -16,27 +16,23 @@
   <meta name="author" content="huerli">
   <meta name="keywords" content="">
   
-    <meta name="description" content="STM32基于HAL库的一些例程和外设">
+    <meta name="description" content="蓝牙配对基本命令模块复位   指令 响应 参数    AT+RESET OK 无   恢复默认状态   指令 响应 参数    AT+ORGL OK 无   获取&#x2F;设置模块地址   指令 响应 参数    AT+ADDR？ +ADDR： OK Param：模块蓝牙地址   AT+ADDR&#x3D;&lt;Param&gt; OK Param：模块蓝牙地址   获取&#x2F;设置模块角">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STM32_HAL_DEMO">
-<meta property="og:url" content="https://huerli.github.io/2023/04/21/STM32-HAL-DEMO/index.html">
+<meta property="og:title" content="蓝牙">
+<meta property="og:url" content="https://huerli.github.io/2023/09/26/%E8%93%9D%E7%89%99/index.html">
 <meta property="og:site_name" content="huerli Blog">
-<meta property="og:description" content="STM32基于HAL库的一些例程和外设">
+<meta property="og:description" content="蓝牙配对基本命令模块复位   指令 响应 参数    AT+RESET OK 无   恢复默认状态   指令 响应 参数    AT+ORGL OK 无   获取&#x2F;设置模块地址   指令 响应 参数    AT+ADDR？ +ADDR： OK Param：模块蓝牙地址   AT+ADDR&#x3D;&lt;Param&gt; OK Param：模块蓝牙地址   获取&#x2F;设置模块角">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huerli.github.io/img/cubemx+keil/clion_mpu9250_1.png">
-<meta property="og:image" content="https://huerli.github.io/img/cubemx+keil/clion_mpu9250.png">
-<meta property="article:published_time" content="2023-04-21T13:23:59.955Z">
-<meta property="article:modified_time" content="2023-05-25T13:30:17.452Z">
+<meta property="article:published_time" content="2023-09-26T00:36:10.000Z">
+<meta property="article:modified_time" content="2023-09-26T00:36:27.502Z">
 <meta property="article:author" content="huerli">
-<meta property="article:tag" content="STM32">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huerli.github.io/img/cubemx+keil/clion_mpu9250_1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>STM32_HAL_DEMO - huerli Blog</title>
+  <title>蓝牙 - huerli Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="STM32_HAL_DEMO"></span>
+            <span id="subtitle" data-typed-text="蓝牙"></span>
           
         </div>
 
@@ -213,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-21 21:23" pubdate>
-          2023年4月21日 晚上
+        <time datetime="2023-09-26 08:36" pubdate>
+          2023年9月26日 早上
         </time>
       </span>
     
@@ -225,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          978 字
         
       </span>
     
@@ -236,7 +232,7 @@
         
         
         
-          11 分钟
+          9 分钟
         
       </span>
     
@@ -282,22 +278,180 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">STM32_HAL_DEMO</h1>
+            <h1 style="display: none">蓝牙</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h1><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><h3 id="按键"><a href="#按键" class="headerlink" title="按键"></a>按键</h3><h2 id="外部中断"><a href="#外部中断" class="headerlink" title="外部中断"></a>外部中断</h2><h1 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h1><h2 id="串口发送"><a href="#串口发送" class="headerlink" title="串口发送"></a>串口发送</h2><h3 id="正常发送"><a href="#正常发送" class="headerlink" title="正常发送"></a>正常发送</h3><h3 id="中断发送"><a href="#中断发送" class="headerlink" title="中断发送"></a>中断发送</h3><h3 id="DMA发送"><a href="#DMA发送" class="headerlink" title="DMA发送"></a>DMA发送</h3><h3 id="串口重定向"><a href="#串口重定向" class="headerlink" title="串口重定向"></a>串口重定向</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Ctrl+c">#include&lt;stdio.h&gt;<br> <br>#ifdef __GNUC__<br>#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)<br>#else<br>#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)<br>#endif<br>PUTCHAR_PROTOTYPE<br>&#123;<br>	HAL_UART_Transmit(&amp;huart1, (uint8_t *)&amp;ch, 1, 0xFFFF);<br>	return ch;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="串口接收"><a href="#串口接收" class="headerlink" title="串口接收"></a>串口接收</h2><h3 id="正常接收"><a href="#正常接收" class="headerlink" title="正常接收"></a>正常接收</h3><h3 id="中断接收"><a href="#中断接收" class="headerlink" title="中断接收"></a>中断接收</h3><h3 id="DMA接收"><a href="#DMA接收" class="headerlink" title="DMA接收"></a>DMA接收</h3><h2 id="与ESP01S通讯"><a href="#与ESP01S通讯" class="headerlink" title="与ESP01S通讯"></a>与ESP01S通讯</h2><h3 id="发送"><a href="#发送" class="headerlink" title="发送"></a>发送</h3><h3 id="接收"><a href="#接收" class="headerlink" title="接收"></a>接收</h3><h2 id="与K210通讯"><a href="#与K210通讯" class="headerlink" title="与K210通讯"></a>与K210通讯</h2><h3 id="发送-1"><a href="#发送-1" class="headerlink" title="发送"></a>发送</h3><h3 id="接收-1"><a href="#接收-1" class="headerlink" title="接收"></a>接收</h3><h1 id="TIM"><a href="#TIM" class="headerlink" title="TIM"></a>TIM</h1><h2 id="定时中断"><a href="#定时中断" class="headerlink" title="定时中断"></a>定时中断</h2><h2 id="微秒级延时"><a href="#微秒级延时" class="headerlink" title="微秒级延时"></a>微秒级延时</h2><h2 id="驱动舵机"><a href="#驱动舵机" class="headerlink" title="驱动舵机"></a>驱动舵机</h2><h1 id="RTC"><a href="#RTC" class="headerlink" title="RTC"></a>RTC</h1><h2 id="读取时间"><a href="#读取时间" class="headerlink" title="读取时间"></a>读取时间</h2><h1 id="IIC"><a href="#IIC" class="headerlink" title="IIC"></a>IIC</h1><h2 id="驱动OLED"><a href="#驱动OLED" class="headerlink" title="驱动OLED"></a>驱动OLED</h2><h2 id="驱动PCF8591"><a href="#驱动PCF8591" class="headerlink" title="驱动PCF8591"></a>驱动PCF8591</h2><h2 id="驱动EEPROM"><a href="#驱动EEPROM" class="headerlink" title="驱动EEPROM"></a>驱动EEPROM</h2><h1 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h1><h2 id="WS2812"><a href="#WS2812" class="headerlink" title="WS2812"></a>WS2812</h2><h2 id="LCD7735"><a href="#LCD7735" class="headerlink" title="LCD7735"></a>LCD7735</h2><h2 id="flash"><a href="#flash" class="headerlink" title="flash"></a>flash</h2><h1 id="USB"><a href="#USB" class="headerlink" title="USB"></a>USB</h1><h2 id="虚拟串口"><a href="#虚拟串口" class="headerlink" title="虚拟串口"></a>虚拟串口</h2><h1 id="FMSC"><a href="#FMSC" class="headerlink" title="FMSC"></a>FMSC</h1><h2 id="驱动正点原子LCD"><a href="#驱动正点原子LCD" class="headerlink" title="驱动正点原子LCD"></a>驱动正点原子LCD</h2><h1 id="使用CLION开发"><a href="#使用CLION开发" class="headerlink" title="使用CLION开发"></a>使用CLION开发</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">include_directories</span><span class="hljs-params">($&#123;includes&#125; HW)</span></span><br><span class="hljs-function"><span class="hljs-title">file</span><span class="hljs-params">(GLOB_RECURSE SOURCES $&#123;sources&#125; <span class="hljs-string">&quot;HW/*.*&quot;</span>)</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="陀螺仪"><a href="#陀螺仪" class="headerlink" title="陀螺仪"></a>陀螺仪</h2><p>Clion 在编译MPU9250时cmake 并不会直接添加外部库的链接，也没有添加定义、会导致以下的问题。  </p>
-<h3 id="未定义"><a href="#未定义" class="headerlink" title="未定义"></a>未定义</h3><p>添加下方在CmakeList.txt，目标文件-DEMPL_TARGET_STM32F4更具芯片型号来。<br><img src="/img/cubemx+keil/clion_mpu9250_1.png" srcset="/img/loading.gif" lazyload></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">add_definitions</span><span class="hljs-params">(-DEMPL_TARGET_STM32F4 -DMPU9250 -DEMPL -DMPL_LOG_NDEBUG=<span class="hljs-number">1</span>)</span></span><br></code></pre></td></tr></table></figure>
-<h3 id="未包含库"><a href="#未包含库" class="headerlink" title="未包含库"></a>未包含库</h3><p>出现以下问题则这样解决即可<br><img src="/img/cubemx+keil/clion_mpu9250.png" srcset="/img/loading.gif" lazyload></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">link_directories</span><span class="hljs-params">(HW/DMP/mpl/)</span></span>#括号的内容是库所在的路径<br><span class="hljs-function"><span class="hljs-title">link_libraries</span><span class="hljs-params">(liblibmplmpu.a)</span></span>#库名，需要注意的是gcc并不能使用lib库，需要在官方包中找到gcc使用的 *<span class="hljs-selector-class">.a</span> 库<br></code></pre></td></tr></table></figure>
-<h1 id="KEIL-问题"><a href="#KEIL-问题" class="headerlink" title="KEIL 问题"></a>KEIL 问题</h1><h2 id="芯片包版本过高的情况下使用国产芯片"><a href="#芯片包版本过高的情况下使用国产芯片" class="headerlink" title="芯片包版本过高的情况下使用国产芯片"></a>芯片包版本过高的情况下使用国产芯片</h2><p>![](&#x2F;img&#x2F;cubemx+keil&#x2F;not a genuine.png)</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">S</span>:\Keil_v5\ARM\Packs\Keil\STM32F1xx_DFP\<span class="hljs-number">2</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
-<p>打开Keil.STM32F1xx_DFP.pdsc，可用记事本保存为txt，等下编辑完后改后缀替换这个文件，可以先备份。<br>Ctrl+F搜not a genuine<br>在block块内把相关两句前加上&#x2F;&#x2F;注释掉即可。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">control</span> <span class="hljs-attr">if</span>=<span class="hljs-string">&quot;jep106id != 0x20&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">block</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Query(0, &quot;Not a genuine ST Device! Abort connection&quot;, 1);</span><br><span class="hljs-comment">    Message(2, &quot;Not a genuine ST Device! Abort connection.&quot;);--&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">block</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">control</span>&gt;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="蓝牙配对"><a href="#蓝牙配对" class="headerlink" title="蓝牙配对"></a>蓝牙配对</h1><h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="模块复位"><a href="#模块复位" class="headerlink" title="模块复位"></a>模块复位</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+RESET</td>
+<td>OK</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h3 id="恢复默认状态"><a href="#恢复默认状态" class="headerlink" title="恢复默认状态"></a>恢复默认状态</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+ORGL</td>
+<td>OK</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h3 id="获取-x2F-设置模块地址"><a href="#获取-x2F-设置模块地址" class="headerlink" title="获取&#x2F;设置模块地址"></a>获取&#x2F;设置模块地址</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+ADDR？</td>
+<td>+ADDR：<Param> OK</td>
+<td>Param：模块蓝牙地址</td>
+</tr>
+<tr>
+<td>AT+ADDR&#x3D;&lt;<code>Param</code>&gt;</td>
+<td>OK</td>
+<td>Param：模块蓝牙地址</td>
+</tr>
+</tbody></table>
+<h3 id="获取-x2F-设置模块角色"><a href="#获取-x2F-设置模块角色" class="headerlink" title="获取&#x2F;设置模块角色"></a>获取&#x2F;设置模块角色</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+ROLE</td>
+<td>+ROLE:&lt;<code>Param</code>&gt; <br>OK</br></td>
+<td>1-主机 <br>2-回环</br></td>
+</tr>
+<tr>
+<td>AT+ROLE&#x3D;<Param></td>
+<td>OK</td>
+<td><code>Param</code>： 0-从机（默认）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>从角色——被动连接；</li>
+<li>回环角色——被动连接，接收远程蓝牙主设备数据并将数据原样返回给远程蓝牙主设备；</li>
+<li>主角色——查询周围 SPP 蓝牙从设备，并主动发起连接，从而建立主、从蓝牙设备间的透明数据传输通道。</li>
+</ul>
+<h3 id="获取-x2F-设置模块名称"><a href="#获取-x2F-设置模块名称" class="headerlink" title="获取&#x2F;设置模块名称"></a>获取&#x2F;设置模块名称</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+NAME&#x3D;<Param></td>
+<td>OK</td>
+<td>Param：模块蓝牙名称</td>
+</tr>
+<tr>
+<td>AT+NAME？</td>
+<td>+NAME:&lt;<code>Param</code>&gt; <br>OK</br></td>
+<td>Param：模块蓝牙名称</td>
+</tr>
+</tbody></table>
+<h3 id="获取-x2F-设置串口参数"><a href="#获取-x2F-设置串口参数" class="headerlink" title="获取&#x2F;设置串口参数"></a>获取&#x2F;设置串口参数</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+UART&#x3D;&lt;<code>Param1</code>&gt;,&lt;<code>Param2</code>&gt;,&lt;<code>Param3</code>&gt;</td>
+<td>OK</td>
+<td>Param1：波特率 <br>Param2：停止位</br><br>Param3：校验位</br></td>
+</tr>
+<tr>
+<td>AT+UART?</td>
+<td>+UART&#x3D;&lt;<code>Param1</code>&gt;,&lt;<code>Param2</code>&gt;,&lt;<code>Param3</code>&gt; OK</td>
+<td>（默认：9600，0，0）</td>
+</tr>
+</tbody></table>
+<h3 id="获取-x2F-设置绑定蓝牙地址"><a href="#获取-x2F-设置绑定蓝牙地址" class="headerlink" title="获取&#x2F;设置绑定蓝牙地址"></a>获取&#x2F;设置绑定蓝牙地址</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+BIND&#x3D;<Param></td>
+<td>OK</td>
+<td>Param：绑定蓝牙地址</td>
+</tr>
+<tr>
+<td>AT+ BIND？</td>
+<td>+ BIND:<Param>OK</td>
+<td>Param：绑定蓝牙地址</td>
+</tr>
+</tbody></table>
+<h3 id="获取-x2F-设置蓝牙密码"><a href="#获取-x2F-设置蓝牙密码" class="headerlink" title="获取&#x2F;设置蓝牙密码"></a>获取&#x2F;设置蓝牙密码</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>响应</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT+PSWD&#x3D;<Param></td>
+<td>OK</td>
+<td>Param：蓝牙密码</td>
+</tr>
+<tr>
+<td>AT+ PSWD？</td>
+<td>+ PSWD:<Param>OK</td>
+<td>Param：蓝牙密码</td>
+</tr>
+</tbody></table>
+<h2 id="配对"><a href="#配对" class="headerlink" title="配对"></a>配对</h2><h3 id="恢复出厂设置"><a href="#恢复出厂设置" class="headerlink" title="恢复出厂设置"></a>恢复出厂设置</h3><p>清空以前操作（可选）</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">AT</span>+ORGL<br></code></pre></td></tr></table></figure>
+<h3 id="修改主从角色"><a href="#修改主从角色" class="headerlink" title="修改主从角色"></a>修改主从角色</h3><p>主：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">AT+<span class="hljs-keyword">ROLE</span> <span class="hljs-title">=1</span><br></code></pre></td></tr></table></figure>
+<p>从</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">AT+<span class="hljs-keyword">ROLE</span> <span class="hljs-title">=0</span><br></code></pre></td></tr></table></figure>
+<h3 id="修改名字"><a href="#修改名字" class="headerlink" title="修改名字"></a>修改名字</h3><p>用于区分主从机<br>主：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">AT</span>+NAME = A<br></code></pre></td></tr></table></figure>
+<p>从</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">AT</span>+NAME = B<br></code></pre></td></tr></table></figure>
+<h3 id="修改波特率"><a href="#修改波特率" class="headerlink" title="修改波特率"></a>修改波特率</h3><p>主：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">AT</span>+UART=<span class="hljs-number">115200</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<p>从</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">AT</span>+UART=<span class="hljs-number">115200</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><p>主：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">AT</span>+PSWD=<span class="hljs-string">&quot;123456&quot;</span><br></code></pre></td></tr></table></figure>
+<p>从</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">AT</span>+PSWD=<span class="hljs-string">&quot;123456&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="查询并绑定地址"><a href="#查询并绑定地址" class="headerlink" title="查询并绑定地址"></a>查询并绑定地址</h3><p>从</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">AT</span>+BIND<br></code></pre></td></tr></table></figure>
+<p>主</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">AT</span>+BIND=<span class="hljs-number">21</span>,<span class="hljs-number">13</span>,<span class="hljs-number">522200</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -305,34 +459,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/STM32/" class="category-chain-item">STM32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/STM32/">#STM32</a>
-      
-    </div>
   
 </div>
 
@@ -342,8 +468,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>STM32_HAL_DEMO</div>
-      <div>https://huerli.github.io/2023/04/21/STM32-HAL-DEMO/</div>
+      <div>蓝牙</div>
+      <div>https://huerli.github.io/2023/09/26/蓝牙/</div>
     </div>
     <div class="license-meta">
       
@@ -355,7 +481,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月21日</div>
+          <div>2023年9月26日</div>
         </div>
       
       
@@ -387,9 +513,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/12/RV1126/" title="RV1126">
+                      <a href="/2023/09/26/%E7%BC%96%E8%AF%91T113-tina/" title="编译T113-tina">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RV1126</span>
+                        <span class="hidden-mobile">编译T113-tina</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -397,8 +523,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/12/%E5%A4%8D%E5%88%BB/" title="复刻">
-                        <span class="hidden-mobile">复刻</span>
+                      <a href="/2023/09/26/qt-configure/" title="qt-configure">
+                        <span class="hidden-mobile">qt-configure</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
